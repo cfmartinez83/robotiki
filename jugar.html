@@ -68,6 +68,8 @@
 
         <div class="robot-dj-shell">
           <div class="dj-stage" data-robot-dj>
+            <div class="dj-countdown" data-dj-countdown aria-live="polite"></div>
+
             <div class="dj-scoreboard">
               <span data-dj-level>Nivel 1</span>
               <strong data-dj-score>XP 0</strong>
@@ -81,14 +83,23 @@
 
             <div class="dj-robot" data-dj-robot aria-label="Robot DJ animado">
               <div class="dj-antenna"></div>
+              <div class="dj-studs head-studs" aria-hidden="true"><span></span><span></span></div>
               <div class="dj-head">
-                <span></span>
-                <span></span>
+                <span class="dj-eye"></span>
+                <span class="dj-eye"></span>
+                <b></b>
               </div>
+              <div class="dj-arm left"><span></span></div>
+              <div class="dj-arm right"><span></span></div>
+              <div class="dj-studs body-studs" aria-hidden="true"><span></span><span></span><span></span></div>
               <div class="dj-body">
                 <i></i>
                 <i></i>
                 <i></i>
+              </div>
+              <div class="dj-legs">
+                <span></span>
+                <span></span>
               </div>
               <div class="dj-deck">
                 <span></span>
@@ -147,6 +158,7 @@
             <div class="game-actions">
               <button class="btn btn-violet" type="button" data-play-sequence disabled>▶ Ejecutar show</button>
               <button class="btn btn-outline" type="button" data-clear-sequence>Limpiar</button>
+              <button class="btn btn-sound" type="button" data-toggle-sound aria-pressed="false">🔇 Sonido OFF</button>
             </div>
           </div>
         </div>

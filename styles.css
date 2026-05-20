@@ -488,6 +488,18 @@ button {
   box-shadow: none;
 }
 
+.btn-sound {
+  border: 1px solid rgba(251, 191, 36, 0.32);
+  background: rgba(251, 191, 36, 0.1);
+  color: #ffe8a3;
+}
+
+.btn-sound[aria-pressed="true"] {
+  border-color: rgba(52, 211, 153, 0.62);
+  background: rgba(52, 211, 153, 0.14);
+  color: #a7f3d0;
+}
+
 .game-page {
   min-height: 100vh;
 }
@@ -551,6 +563,32 @@ button {
   background: rgba(0, 0, 0, 0.28);
   filter: blur(10px);
   content: "";
+}
+
+.dj-countdown {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  color: var(--white);
+  font-size: clamp(4rem, 18vw, 9rem);
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  opacity: 0;
+  text-shadow: 0 0 30px rgba(251, 191, 36, 0.75);
+  transform: scale(0.72);
+}
+
+.dj-countdown.show {
+  animation: countdownPop 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dj-countdown.go {
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.22), transparent 48%);
+  color: var(--green);
+  text-shadow: 0 0 34px rgba(52, 211, 153, 0.9);
 }
 
 .dj-scoreboard {
@@ -622,8 +660,8 @@ button {
 .dj-robot {
   position: relative;
   z-index: 1;
-  width: 220px;
-  height: 330px;
+  width: 270px;
+  height: 390px;
   transform-origin: center bottom;
   transition: transform 180ms ease;
 }
@@ -644,8 +682,8 @@ button {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 18px;
-  height: 58px;
+  width: 16px;
+  height: 54px;
   border-radius: 100px;
   background: var(--green);
   box-shadow: 0 0 24px rgba(52, 211, 153, 0.55);
@@ -671,39 +709,75 @@ button {
   position: absolute;
   left: 50%;
   border: 4px solid #1b093d;
-  box-shadow: inset 0 -12px 0 rgba(0, 0, 0, 0.16);
+  box-shadow:
+    inset 10px 10px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -14px 0 rgba(0, 0, 0, 0.18),
+    0 18px 30px rgba(0, 0, 0, 0.22);
   transform: translateX(-50%);
 }
 
 .dj-head {
-  top: 56px;
+  top: 60px;
   display: flex;
-  width: 150px;
-  height: 106px;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  border-radius: 28px;
-  background: var(--violet);
-}
-
-.dj-head span {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--yellow);
-  box-shadow: 0 0 18px rgba(251, 191, 36, 0.8);
-}
-
-.dj-body {
-  top: 174px;
-  display: flex;
-  width: 184px;
+  width: 168px;
   height: 116px;
   align-items: center;
   justify-content: center;
+  gap: 24px;
+  border-radius: 20px;
+  background: var(--violet);
+}
+
+.dj-head::before,
+.dj-head::after {
+  position: absolute;
+  top: 34px;
+  width: 20px;
+  height: 34px;
+  border: 4px solid #1b093d;
+  border-radius: 12px;
+  background: var(--yellow);
+  content: "";
+}
+
+.dj-head::before {
+  left: -18px;
+}
+
+.dj-head::after {
+  right: -18px;
+}
+
+.dj-eye {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 4px solid #1b093d;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #ffffff 0 4px, var(--green) 5px 11px, #111827 12px);
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.65);
+}
+
+.dj-head b {
+  position: absolute;
+  right: 48px;
+  bottom: 22px;
+  left: 48px;
+  height: 10px;
+  border-radius: 100px;
+  background: #1b093d;
+  box-shadow: 0 10px 0 rgba(27, 9, 61, 0.55);
+}
+
+.dj-body {
+  top: 196px;
+  display: flex;
+  width: 202px;
+  height: 132px;
+  align-items: center;
+  justify-content: center;
   gap: 14px;
-  border-radius: 30px;
+  border-radius: 22px;
   background: linear-gradient(145deg, var(--violet), #4c1d95);
 }
 
@@ -719,10 +793,132 @@ button {
   box-shadow: 0 0 22px rgba(52, 211, 153, 0.8);
 }
 
+.dj-studs {
+  position: absolute;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  gap: 18px;
+  transform: translateX(-50%);
+}
+
+.dj-studs span {
+  width: 30px;
+  height: 18px;
+  border: 4px solid #1b093d;
+  border-radius: 999px 999px 12px 12px;
+  background: #8b5cf6;
+  box-shadow: inset 4px 3px 0 rgba(255, 255, 255, 0.14);
+}
+
+.head-studs {
+  top: 44px;
+}
+
+.body-studs {
+  top: 178px;
+}
+
+.body-studs span {
+  background: #6d28d9;
+}
+
+.dj-arm {
+  position: absolute;
+  top: 207px;
+  z-index: 0;
+  width: 52px;
+  height: 112px;
+  border: 4px solid #1b093d;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #7c3aed, #4c1d95);
+  box-shadow: inset 7px 8px 0 rgba(255, 255, 255, 0.1), inset 0 -10px 0 rgba(0, 0, 0, 0.16);
+  transform-origin: top center;
+}
+
+.dj-arm.left {
+  left: 7px;
+  transform: rotate(16deg);
+}
+
+.dj-arm.right {
+  right: 7px;
+  transform: rotate(-16deg);
+}
+
+.dj-arm span {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  width: 48px;
+  height: 38px;
+  border: 4px solid #1b093d;
+  border-radius: 18px 18px 24px 24px;
+  background: var(--yellow);
+  box-shadow: inset 5px 5px 0 rgba(255, 255, 255, 0.2), inset 0 -8px 0 rgba(0, 0, 0, 0.14);
+  transform: translateX(-50%);
+}
+
+.dj-arm span::before,
+.dj-arm span::after {
+  position: absolute;
+  bottom: -10px;
+  width: 18px;
+  height: 18px;
+  border: 4px solid #1b093d;
+  border-radius: 50%;
+  background: var(--yellow);
+  content: "";
+}
+
+.dj-arm span::before {
+  left: 2px;
+}
+
+.dj-arm span::after {
+  right: 2px;
+}
+
+.dj-robot.wave .dj-arm.right {
+  animation: robotArmWave 580ms ease-in-out;
+}
+
+.dj-legs {
+  position: absolute;
+  right: 60px;
+  bottom: 36px;
+  left: 60px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dj-legs span {
+  position: relative;
+  width: 48px;
+  height: 68px;
+  border: 4px solid #1b093d;
+  border-radius: 16px 16px 22px 22px;
+  background: linear-gradient(145deg, #6d28d9, #3b1678);
+  box-shadow: inset 6px 6px 0 rgba(255, 255, 255, 0.1), inset 0 -10px 0 rgba(0, 0, 0, 0.18);
+}
+
+.dj-legs span::after {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  width: 58px;
+  height: 24px;
+  border: 4px solid #1b093d;
+  border-radius: 16px;
+  background: #111827;
+  content: "";
+  transform: translateX(-50%);
+}
+
 .dj-deck {
   bottom: 0;
   display: flex;
-  width: 230px;
+  width: 250px;
   height: 72px;
   align-items: center;
   justify-content: space-around;
@@ -1520,6 +1716,21 @@ button {
   }
 }
 
+@keyframes countdownPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.22);
+  }
+}
+
 @keyframes djBeat {
   0%,
   100% {
@@ -1558,6 +1769,19 @@ button {
   }
 }
 
+@keyframes robotArmWave {
+  0%,
+  100% {
+    transform: rotate(-16deg);
+  }
+  30% {
+    transform: rotate(-58deg) translateY(-8px);
+  }
+  60% {
+    transform: rotate(-34deg) translateY(-4px);
+  }
+}
+
 @keyframes deckSpin {
   to {
     transform: rotate(360deg);
@@ -1585,6 +1809,10 @@ button {
 
   .game-actions {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .game-actions .btn-sound {
+    grid-column: 1 / -1;
   }
 
   .sequence-slots {

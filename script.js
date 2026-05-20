@@ -142,13 +142,17 @@ function initRobotDjGame() {
   const slots = Array.from(document.querySelectorAll("[data-sequence-index]"));
   const playButton = document.querySelector("[data-play-sequence]");
   const clearButton = document.querySelector("[data-clear-sequence]");
+  const soundButton = document.querySelector("[data-toggle-sound]");
   const status = document.querySelector("[data-dj-status]");
   const score = document.querySelector("[data-dj-score]");
   const level = document.querySelector("[data-dj-level]");
   const robot = document.querySelector("[data-dj-robot]");
+  const countdown = document.querySelector("[data-dj-countdown]");
   const codeLines = Array.from(document.querySelectorAll(".dj-code .code-line"));
   const bodyLights = Array.from(document.querySelectorAll(".dj-body i"));
   const sequence = [];
+  let audioContext = null;
+  let soundEnabled = false;
 
   const labels = {
     light: "💡",
@@ -185,10 +189,106 @@ function initRobotDjGame() {
     });
   }
 
+  function ensureAudioContext() {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return null;
+
+    if (!audioContext) {
+      audioContext = new AudioContextClass();
+    }
+
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
+    return audioContext;
+  }
+
+  function playTone(frequency, duration = 0.16, type = "sine", delay = 0) {
+    if (!soundEnabled) return;
+
+    const context = ensureAudioContext();
+    if (!context) return;
+
+    const start = context.currentTime + delay;
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+
+    oscillator.type = type;
+    oscillator.frequency.setValueAtTime(frequency, start);
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(0.16, start + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+    oscillator.start(start);
+    oscillator.stop(start + duration + 0.03);
+  }
+
+  function playCommandSound(command) {
+    if (command === "light") {
+      playTone(740, 0.12, "triangle");
+      playTone(980, 0.12, "triangle", 0.08);
+    }
+
+    if (command === "beat") {
+      playTone(130, 0.09, "square");
+      playTone(92, 0.08, "square", 0.12);
+    }
+
+    if (command === "spin") {
+      playTone(360, 0.08, "sawtooth");
+      playTone(520, 0.1, "sawtooth", 0.08);
+      playTone(690, 0.12, "sawtooth", 0.16);
+    }
+
+    if (command === "wave") {
+      playTone(523.25, 0.14, "sine");
+      playTone(659.25, 0.16, "sine", 0.12);
+    }
+  }
+
+  function showCountdownItem(text, index) {
+    window.setTimeout(
+      () => {
+        if (!countdown) return;
+
+        countdown.textContent = text;
+        countdown.classList.remove("show", "go");
+        if (text === "GO!") countdown.classList.add("go");
+
+        window.requestAnimationFrame(() => {
+          countdown.classList.add("show");
+        });
+
+        if (soundEnabled) {
+          playTone(text === "GO!" ? 880 : 440 + index * 70, text === "GO!" ? 0.22 : 0.1, "square");
+        }
+      },
+      reducedMotion ? 0 : index * 620,
+    );
+  }
+
+  function startCountdown(onComplete) {
+    if (reducedMotion) {
+      onComplete();
+      return;
+    }
+
+    ["3", "2", "1", "GO!"].forEach(showCountdownItem);
+    window.setTimeout(() => {
+      countdown?.classList.remove("show", "go");
+      onComplete();
+    }, 2550);
+  }
+
   function runCommand(command) {
     bodyLights.forEach((light, index) => {
       light.classList.toggle("active", command === "light" || index === sequence.length % 3);
     });
+
+    playCommandSound(command);
 
     if (command === "light") {
       flashClass(game, "light-show", 650);
@@ -211,6 +311,8 @@ function initRobotDjGame() {
 
   commands.forEach((button) => {
     button.addEventListener("click", () => {
+      if (soundEnabled) ensureAudioContext();
+
       if (sequence.length >= slots.length) {
         updateSequence("La secuencia está completa. Ejecutá el show o limpiá para probar otro patrón.");
         return;
@@ -237,31 +339,35 @@ function initRobotDjGame() {
     playButton.disabled = true;
     game.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
     codeLines.forEach((line) => line.classList.remove("active"));
-    if (status) status.textContent = "Ejecutando tu programa paso por paso...";
+    if (status) status.textContent = "Preparando show: 3, 2, 1...";
 
-    sequence.forEach((command, index) => {
+    startCountdown(() => {
+      if (status) status.textContent = "Ejecutando tu programa paso por paso...";
+
+      sequence.forEach((command, index) => {
+        window.setTimeout(
+          () => {
+            slots.forEach((slot) => slot.classList.remove("playing"));
+            slots[index]?.classList.add("playing");
+            codeLines[Math.min(index, codeLines.length - 1)]?.classList.add("active");
+            runCommand(command);
+            if (score) score.textContent = `XP ${120 + (index + 1) * 25}`;
+          },
+          reducedMotion ? 0 : index * 700,
+        );
+      });
+
       window.setTimeout(
         () => {
           slots.forEach((slot) => slot.classList.remove("playing"));
-          slots[index]?.classList.add("playing");
-          codeLines[Math.min(index, codeLines.length - 1)]?.classList.add("active");
-          runCommand(command);
-          if (score) score.textContent = `XP ${120 + (index + 1) * 25}`;
+          if (status) status.textContent = "¡Show completo! Tu robot ejecutó la secuencia como un programa real.";
+          if (score) score.textContent = "XP 300";
+          if (level) level.textContent = "Nivel 2 desbloqueado";
+          playButton.disabled = false;
         },
-        reducedMotion ? 0 : index * 700,
+        reducedMotion ? 0 : sequence.length * 700 + 500,
       );
     });
-
-    window.setTimeout(
-      () => {
-        slots.forEach((slot) => slot.classList.remove("playing"));
-        if (status) status.textContent = "¡Show completo! Tu robot ejecutó la secuencia como un programa real.";
-        if (score) score.textContent = "XP 300";
-        if (level) level.textContent = "Nivel 2 desbloqueado";
-        playButton.disabled = false;
-      },
-      reducedMotion ? 0 : sequence.length * 700 + 500,
-    );
   });
 
   clearButton?.addEventListener("click", () => {
@@ -269,6 +375,21 @@ function initRobotDjGame() {
     codeLines.forEach((line) => line.classList.remove("active"));
     bodyLights.forEach((light) => light.classList.remove("active"));
     updateSequence("Elegí comandos para crear tu show.");
+  });
+
+  soundButton?.addEventListener("click", () => {
+    soundEnabled = !soundEnabled;
+    soundButton.setAttribute("aria-pressed", String(soundEnabled));
+    soundButton.textContent = soundEnabled ? "🔊 Sonido ON" : "🔇 Sonido OFF";
+
+    if (soundEnabled) {
+      ensureAudioContext();
+      playTone(523.25, 0.12, "sine");
+      playTone(783.99, 0.16, "sine", 0.12);
+      if (status) status.textContent = "Sonido activado. Ahora tus comandos también suenan.";
+    } else if (status) {
+      status.textContent = "Sonido apagado. Podés seguir jugando en silencio.";
+    }
   });
 
   updateSequence("Elegí comandos para crear tu show.");
