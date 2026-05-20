@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Robotiki es una escuela de programación y robótica para chicos y chicas desde los 4 años en Buenos Aires. Talleres con LEGO, grupos reducidos, experiencias, eventos y clase de prueba."
+    />
+    <meta name="theme-color" content="#0d0221" />
+    <meta property="og:title" content="Robotiki | Programación y robótica para chicos y chicas" />
+    <meta
+      property="og:description"
+      content="Desde los 4 años, aprendiendo con LEGO y tecnología real en sedes de CABA y GBA Norte."
+    />
+    <meta property="og:type" content="website" />
+    <title>Robotiki | Programación y robótica para chicos y chicas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="cursor-follower" aria-hidden="true"></div>
+
+    <header class="navbar" data-navbar>
+      <a class="logo" href="#inicio" aria-label="Ir al inicio de Robotiki">
+        <span class="logo-icon" aria-hidden="true">🤖</span>
+        <span><strong>Robo</strong><strong class="logo-accent">tiki</strong></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegación principal">
+        <a href="#talleres">Talleres</a>
+        <a href="#sedes">Sedes</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#cumple">Cumple Robotiki</a>
+      </nav>
+
+      <a class="btn btn-orange desktop-cta" href="https://wa.me/5491133917070" target="_blank" rel="noreferrer">
+        ¡Quiero probar!
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="mobile-nav" aria-label="Navegación mobile" data-mobile-nav>
+        <a href="#talleres">Talleres</a>
+        <a href="#sedes">Sedes</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#cumple">Cumple Robotiki</a>
+        <a class="btn btn-orange" href="https://wa.me/5491133917070" target="_blank" rel="noreferrer">
+          ¡Quiero probar!
+        </a>
+      </nav>
+    </header>
+
+    <main id="inicio">
+      <section class="hero section">
+        <div class="hero-visual reveal">
+          <div class="robot-card">
+            <canvas id="robot-canvas" aria-label="Robot 3D animado de Robotiki"></canvas>
+            <div class="canvas-fallback" data-canvas-fallback>
+              <span>🤖</span>
+              <p>Robotiki en modo aventura</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-copy reveal">
+          <div class="badge pulse">⭐ +500 chicos jugando y aprendiendo</div>
+          <h1>Construí, programá y conquistá el <span>futuro</span></h1>
+          <p class="hero-subtitle">
+            Programación y robótica para chicos y chicas desde los 4 años. Aprenden con LEGO,
+            tecnología real y desafíos que se sienten como un videojuego.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-violet glow" href="https://wa.me/5491133917070" target="_blank" rel="noreferrer">
+              🚀 ¡Empezar aventura!
+            </a>
+            <a class="btn btn-outline" href="#niveles">▶ Ver cómo es</a>
+          </div>
+          <div class="stats" aria-label="Datos destacados">
+            <span>+500 chicos y chicas</span>
+            <span>6 sedes</span>
+            <span>Clase de prueba completa</span>
+          </div>
+        </div>
+
+        <div class="xp-bar" aria-hidden="true">
+          <span></span>
+        </div>
+      </section>
+
+      <section class="section levels" id="talleres">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Programas por edad</p>
+          <h2 id="niveles">¿En qué nivel estás?</h2>
+        </div>
+        <div class="level-grid stagger">
+          <article class="level-card gradient-violet reveal">
+            <div class="level-icon">🚀</div>
+            <p class="age">4-5 años</p>
+            <h3>Exploradores</h3>
+            <p>Juego, creatividad y primer contacto con la tecnología en un entorno cuidado.</p>
+            <div class="stars" aria-label="Dificultad 1 de 3"><span>★</span><span>☆</span><span>☆</span></div>
+          </article>
+          <article class="level-card gradient-cyan reveal">
+            <div class="level-icon">🛠️</div>
+            <p class="age">6-10 años</p>
+            <h3>Constructores</h3>
+            <p>Construyen y programan robots con metodología LEGO y competencias del siglo XXI.</p>
+            <div class="stars" aria-label="Dificultad 2 de 3"><span>★</span><span>★</span><span>☆</span></div>
+          </article>
+          <article class="level-card gradient-rose reveal">
+            <div class="level-icon">💡</div>
+            <p class="age">10-14 años</p>
+            <h3>Inventores</h3>
+            <p>Proyectos tecnológicos más complejos, programación avanzada y desafíos reales.</p>
+            <div class="stars" aria-label="Dificultad 3 de 3"><span>★</span><span>★</span><span>★</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section game-track reveal" id="eventos">
+        <div class="section-heading">
+          <p class="eyebrow">Progreso de jugador</p>
+          <h2>🎮 Tu camino en Robotiki</h2>
+        </div>
+        <div class="track" data-track>
+          <div class="track-line"><span data-track-progress></span></div>
+          <div class="track-node done"><span>1</span><strong>Explorador</strong></div>
+          <div class="track-node done"><span>2</span><strong>Constructor</strong></div>
+          <div class="track-node current"><span>3</span><strong>Inventor</strong></div>
+          <div class="track-node future"><span>4</span><strong>Campeón</strong></div>
+          <div class="track-node future"><span>5</span><strong>Pro</strong></div>
+        </div>
+      </section>
+
+      <section class="section features" id="cumple">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Por qué Robotiki</p>
+          <h2>Aprender haciendo, jugando y compartiendo</h2>
+        </div>
+        <div class="feature-grid stagger">
+          <article class="feature-card reveal">
+            <span>🧱</span>
+            <h3>LEGO oficial</h3>
+            <p>Materiales originales. Sin imitaciones.</p>
+          </article>
+          <article class="feature-card reveal">
+            <span>👾</span>
+            <h3>Grupos reducidos</h3>
+            <p>Atención personalizada real y actividad adaptada a cada edad.</p>
+          </article>
+          <article class="feature-card reveal">
+            <span>📍</span>
+            <h3>6 sedes en AMBA</h3>
+            <p>Palermo, Belgrano, Devoto, Vicente López, San Isidro, Villa Ballester.</p>
+          </article>
+          <article class="feature-card reveal">
+            <span>🏆</span>
+            <h3>Torneos reales</h3>
+            <p>Competencias nacionales de robótica.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section learning">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Qué aprenden</p>
+          <h2>Habilidades reales para crear, pensar y resolver</h2>
+        </div>
+        <div class="learning-grid stagger">
+          <article class="learning-card reveal"><span>🤖</span><strong>Robótica con LEGO</strong></article>
+          <article class="learning-card reveal"><span>💻</span><strong>Programación adaptada a cada edad</strong></article>
+          <article class="learning-card reveal"><span>🧠</span><strong>Pensamiento lógico</strong></article>
+          <article class="learning-card reveal"><span>🤝</span><strong>Creatividad y trabajo en equipo</strong></article>
+          <article class="learning-card reveal"><span>🧩</span><strong>Resolución de problemas reales</strong></article>
+        </div>
+      </section>
+
+      <section class="section sedes" id="sedes">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Cerca tuyo</p>
+          <h2>Encontrá tu sede</h2>
+        </div>
+        <div class="sedes-grid stagger">
+          <article class="sede-card reveal"><span></span><div><h3>Palermo</h3><p>CABA</p></div></article>
+          <article class="sede-card reveal"><span></span><div><h3>Belgrano</h3><p>CABA</p></div></article>
+          <article class="sede-card reveal"><span></span><div><h3>Devoto</h3><p>CABA</p></div></article>
+          <article class="sede-card reveal"><span></span><div><h3>Vicente López</h3><p>GBA Norte</p></div></article>
+          <article class="sede-card reveal"><span></span><div><h3>San Isidro</h3><p>GBA Norte</p></div></article>
+          <article class="sede-card reveal"><span></span><div><h3>Villa Ballester</h3><p>GBA Norte</p></div></article>
+        </div>
+        <div class="center reveal">
+          <a
+            class="btn btn-outline"
+            href="https://www.google.com/maps/search/Robotiki+Buenos+Aires"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Ver todas las sedes en el mapa →
+          </a>
+        </div>
+      </section>
+
+      <section class="section testimonials">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Familias Robotiki</p>
+          <h2>Lo que cuentan mamás y papás</h2>
+        </div>
+        <div class="testimonial-marquee reveal" data-marquee>
+          <div class="testimonial-track">
+            <article class="testimonial-card"><div class="avatar">ML</div><h3>Mariana L.</h3><p class="kid">Mamá de Tomi, 7</p><p>"Sale de clase contando misiones como si hubiera desbloqueado un mundo nuevo."</p></article>
+            <article class="testimonial-card"><div class="avatar">GS</div><h3>Gustavo S.</h3><p class="kid">Papá de Juana, 10</p><p>"Aprendió a programar sin miedo. Lo vive como un juego y espera toda la semana."</p></article>
+            <article class="testimonial-card"><div class="avatar">VC</div><h3>Valeria C.</h3><p class="kid">Mamá de Benja, 5</p><p>"Me sorprendió la paciencia del equipo y cómo conectan con los más chicos."</p></article>
+            <article class="testimonial-card"><div class="avatar">FP</div><h3>Federico P.</h3><p class="kid">Papá de Emi, 12</p><p>"Los torneos lo motivaron muchísimo. Ahora arma proyectos propios en casa."</p></article>
+            <article class="testimonial-card"><div class="avatar">AR</div><h3>Ana R.</h3><p class="kid">Mamá de Sofi, 8</p><p>"Grupos chicos, materiales excelentes y una energía hermosa en cada clase."</p></article>
+            <article class="testimonial-card"><div class="avatar">NC</div><h3>Nico C.</h3><p class="kid">Papá de Lolo, 9</p><p>"Robotiki fue el primer taller al que quiso volver sin que se lo recordemos."</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h2>Todo listo para la primera clase</h2>
+        </div>
+        <div class="faq-list reveal">
+          <details>
+            <summary>¿Necesita conocimientos previos?</summary>
+            <p>No. Cada chico empieza desde su nivel y avanza con desafíos guiados por docentes.</p>
+          </details>
+          <details>
+            <summary>¿Qué incluye la clase de prueba?</summary>
+            <p>Una clase regular completa: participan junto al grupo, usan los materiales y conocen la dinámica de Robotiki.</p>
+          </details>
+          <details>
+            <summary>¿Cuánto duran las clases?</summary>
+            <p>Las clases duran entre 60 y 90 minutos según la edad, la sede y el programa elegido.</p>
+          </details>
+          <details>
+            <summary>¿Aceptan todos los medios de pago?</summary>
+            <p>Sí. La clase de prueba se abona previamente y el equipo coordina las opciones disponibles al reservar.</p>
+          </details>
+          <details>
+            <summary>¿Puedo agendar visita a la sede?</summary>
+            <p>Sí. Podés escribirnos por WhatsApp y coordinamos una visita en la sede más cómoda.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="section final-cta reveal">
+        <div class="mini-robot" aria-hidden="true">
+          <span>🤖</span>
+        </div>
+        <div>
+          <h2>¿Listo para la primera misión?</h2>
+          <p>La clase de prueba es una clase regular completa. Incluye materiales, grupo reducido y actividad adaptada a la edad.</p>
+          <div class="cta-notes" aria-label="Detalles de la clase de prueba">
+            <span>✅ No requiere conocimientos previos</span>
+            <span>✅ Se abona previamente</span>
+            <span>✅ Sin compromiso de continuidad</span>
+          </div>
+        </div>
+        <a class="btn btn-white" href="https://wa.me/5491133917070" target="_blank" rel="noreferrer">
+          💬 Agendar por WhatsApp
+        </a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <a class="logo" href="#inicio" aria-label="Robotiki">
+          <span class="logo-icon" aria-hidden="true">🤖</span>
+          <span><strong>Robo</strong><strong class="logo-accent">tiki</strong></span>
+        </a>
+        <p>Robotiki — imagina tu futuro</p>
+        <div class="footer-contact">
+          <a href="mailto:info@robotiki.com.ar">info@robotiki.com.ar</a>
+          <a href="mailto:robotikiar@gmail.com">robotikiar@gmail.com</a>
+          <a href="tel:+5491133917070">+54 9 11 3391-7070</a>
+          <span>Av. Libertador 747, Vicente López</span>
+          <span>Lunes a viernes de 9:00 a 20:00 hs.</span>
+        </div>
+      </div>
+      <nav aria-label="Links de footer">
+        <a href="#talleres">Talleres</a>
+        <a href="#cumple">Experiencias</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#sedes">Sedes</a>
+        <a href="#">Legales</a>
+      </nav>
+      <div class="socials" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/robotiki" target="_blank" rel="noreferrer" aria-label="Instagram">◎</a>
+        <a href="https://www.facebook.com/robotiki" target="_blank" rel="noreferrer" aria-label="Facebook">f</a>
+        <a href="https://wa.me/5491133917070" target="_blank" rel="noreferrer" aria-label="WhatsApp">w</a>
+      </div>
+      <p class="copyright">© 2026 Robotiki. Hecho con imaginación, código y robots.</p>
+    </footer>
+
+    <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.15/dist/lenis.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
