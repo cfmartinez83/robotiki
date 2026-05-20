@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Robot DJ: mini juego de Robotiki para programar una secuencia de luces, sonidos y movimiento."
+    />
+    <meta name="theme-color" content="#0d0221" />
+    <title>Robot DJ | Robotiki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="game-page">
+    <div class="cursor-follower" aria-hidden="true"></div>
+
+    <header class="navbar" data-navbar>
+      <a class="logo" href="./index.html" aria-label="Volver a Robotiki">
+        <span class="logo-icon" aria-hidden="true">🤖</span>
+        <span><strong>Robo</strong><strong class="logo-accent">tiki</strong></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegación principal">
+        <a href="./index.html#talleres">Talleres</a>
+        <a href="./index.html#sedes">Sedes</a>
+        <a href="./index.html#eventos">Eventos</a>
+        <a href="./index.html#cumple">Cumple Robotiki</a>
+      </nav>
+
+      <a class="btn btn-orange desktop-cta" href="https://wa.me/5491133917070" target="_blank" rel="noreferrer">
+        ¡Quiero probar!
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="mobile-nav" aria-label="Navegación mobile" data-mobile-nav>
+        <a href="./index.html#talleres">Talleres</a>
+        <a href="./index.html#sedes">Sedes</a>
+        <a href="./index.html#eventos">Eventos</a>
+        <a href="./index.html#cumple">Cumple Robotiki</a>
+        <a class="btn btn-orange" href="https://wa.me/5491133917070" target="_blank" rel="noreferrer">
+          ¡Quiero probar!
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section robot-dj-hero reveal" aria-labelledby="robot-dj-title">
+        <div class="game-copy">
+          <p class="eyebrow">Mini juego</p>
+          <h1 id="robot-dj-title">Robot DJ</h1>
+          <p>
+            Programá una secuencia de luces, sonidos y movimientos. En Robotiki eso se llama pensar como
+            programador: ordenás instrucciones y el robot las ejecuta.
+          </p>
+          <div class="game-status" data-dj-status>Elegí comandos para crear tu show.</div>
+        </div>
+
+        <div class="robot-dj-shell">
+          <div class="dj-stage" data-robot-dj>
+            <div class="dj-scoreboard">
+              <span data-dj-level>Nivel 1</span>
+              <strong data-dj-score>XP 0</strong>
+            </div>
+
+            <div class="dj-lights" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <div class="dj-robot" data-dj-robot aria-label="Robot DJ animado">
+              <div class="dj-antenna"></div>
+              <div class="dj-head">
+                <span></span>
+                <span></span>
+              </div>
+              <div class="dj-body">
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
+              <div class="dj-deck">
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <div class="music-notes" aria-hidden="true">
+              <span>♪</span>
+              <span>✦</span>
+              <span>♫</span>
+            </div>
+          </div>
+
+          <div class="dj-console-card" aria-label="Programá el show">
+            <div class="console-heading">
+              <p class="eyebrow">Programá el show</p>
+              <h2>Armá una secuencia de 6 pasos</h2>
+            </div>
+
+            <div class="sequence-slots" data-sequence-slots aria-label="Secuencia programada">
+              <button class="sequence-slot" type="button" data-sequence-index="0">1</button>
+              <button class="sequence-slot" type="button" data-sequence-index="1">2</button>
+              <button class="sequence-slot" type="button" data-sequence-index="2">3</button>
+              <button class="sequence-slot" type="button" data-sequence-index="3">4</button>
+              <button class="sequence-slot" type="button" data-sequence-index="4">5</button>
+              <button class="sequence-slot" type="button" data-sequence-index="5">6</button>
+            </div>
+
+            <div class="command-pad" aria-label="Comandos disponibles">
+              <button class="command-card violet" type="button" data-command="light">
+                <span>💡</span>
+                Luz violeta
+              </button>
+              <button class="command-card yellow" type="button" data-command="beat">
+                <span>🥁</span>
+                Beat LEGO
+              </button>
+              <button class="command-card green" type="button" data-command="spin">
+                <span>🔁</span>
+                Girar robot
+              </button>
+              <button class="command-card orange" type="button" data-command="wave">
+                <span>👋</span>
+                Saludar
+              </button>
+            </div>
+
+            <div class="dj-code">
+              <div class="code-line"><span>1</span> crear lista de comandos</div>
+              <div class="code-line"><span>2</span> ejecutar paso por paso</div>
+              <div class="code-line"><span>3</span> observar qué hace el robot</div>
+              <div class="code-line"><span>4</span> mejorar el patrón</div>
+            </div>
+
+            <div class="game-actions">
+              <button class="btn btn-violet" type="button" data-play-sequence disabled>▶ Ejecutar show</button>
+              <button class="btn btn-outline" type="button" data-clear-sequence>Limpiar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section final-cta reveal">
+        <div class="mini-robot" aria-hidden="true">
+          <span>🤖</span>
+        </div>
+        <div>
+          <h2>¿Querés programar robots de verdad?</h2>
+          <p>En la clase de prueba usan materiales reales, trabajan en grupo y crean desafíos adaptados a su edad.</p>
+        </div>
+        <a class="btn btn-white" href="https://wa.me/5491133917070" target="_blank" rel="noreferrer">
+          💬 Agendar por WhatsApp
+        </a>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.15/dist/lenis.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

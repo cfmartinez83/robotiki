@@ -426,6 +426,484 @@ button {
   animation: fillXp 1.8s 400ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+.game-copy > p:not(.eyebrow) {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.game-status {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(251, 191, 36, 0.48);
+  border-radius: 100px;
+  background: rgba(251, 191, 36, 0.08);
+  color: #ffe8a3;
+}
+
+.code-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(13, 2, 33, 0.58);
+  color: rgba(255, 255, 255, 0.78);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88rem;
+}
+
+.code-line span {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.5);
+  color: var(--white);
+  font-family: "Nunito", system-ui, sans-serif;
+  font-weight: 900;
+}
+
+.code-line.active {
+  background: rgba(52, 211, 153, 0.16);
+  color: var(--white);
+  box-shadow: 0 0 18px rgba(52, 211, 153, 0.18);
+}
+
+.game-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.game-actions .btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  transform: none;
+  box-shadow: none;
+}
+
+.game-page {
+  min-height: 100vh;
+}
+
+.robot-dj-hero {
+  display: grid;
+  gap: 22px;
+  align-items: start;
+  padding-top: 34px;
+}
+
+.game-copy h1 {
+  max-width: 780px;
+  margin: 0;
+  background: linear-gradient(90deg, var(--violet-light), var(--yellow), var(--green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(4rem, 16vw, 9rem);
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  line-height: 0.82;
+}
+
+.robot-dj-hero .game-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.robot-dj-hero .game-copy > p:not(.eyebrow) {
+  margin: 0;
+}
+
+.robot-dj-shell {
+  display: grid;
+  gap: 16px;
+}
+
+.dj-stage {
+  position: relative;
+  display: grid;
+  min-height: 360px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 36px;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(251, 191, 36, 0.2), transparent 18rem),
+    radial-gradient(circle at 20% 70%, rgba(52, 211, 153, 0.16), transparent 16rem),
+    linear-gradient(145deg, rgba(124, 58, 237, 0.26), rgba(255, 255, 255, 0.06));
+  box-shadow: var(--shadow);
+}
+
+.dj-stage::after {
+  position: absolute;
+  right: 10%;
+  bottom: 48px;
+  left: 10%;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.28);
+  filter: blur(10px);
+  content: "";
+}
+
+.dj-scoreboard {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  left: 18px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.dj-scoreboard span,
+.dj-scoreboard strong {
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 100px;
+  background: rgba(13, 2, 33, 0.55);
+  backdrop-filter: blur(12px);
+}
+
+.dj-scoreboard strong {
+  color: var(--yellow);
+}
+
+.dj-lights {
+  position: absolute;
+  inset: 0;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.dj-lights span {
+  position: absolute;
+  top: -40px;
+  width: 34%;
+  height: 118%;
+  transform-origin: top center;
+  filter: blur(2px);
+  opacity: 0.3;
+  mix-blend-mode: screen;
+}
+
+.dj-lights span:nth-child(1) {
+  --light-angle: 18deg;
+  left: 4%;
+  background: linear-gradient(rgba(124, 58, 237, 0.55), transparent 72%);
+  transform: rotate(18deg);
+}
+
+.dj-lights span:nth-child(2) {
+  --light-angle: 0deg;
+  left: 35%;
+  background: linear-gradient(rgba(251, 191, 36, 0.44), transparent 72%);
+}
+
+.dj-lights span:nth-child(3) {
+  --light-angle: -18deg;
+  right: 4%;
+  background: linear-gradient(rgba(52, 211, 153, 0.48), transparent 72%);
+  transform: rotate(-18deg);
+}
+
+.dj-stage.light-show .dj-lights span {
+  animation: djLightSweep 500ms ease-in-out 2;
+}
+
+.dj-robot {
+  position: relative;
+  z-index: 1;
+  width: 220px;
+  height: 330px;
+  transform-origin: center bottom;
+  transition: transform 180ms ease;
+}
+
+.dj-robot.beat {
+  animation: djBeat 420ms ease-in-out;
+}
+
+.dj-robot.spin {
+  animation: djSpin 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dj-robot.wave {
+  animation: djWave 580ms ease-in-out;
+}
+
+.dj-antenna {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 18px;
+  height: 58px;
+  border-radius: 100px;
+  background: var(--green);
+  box-shadow: 0 0 24px rgba(52, 211, 153, 0.55);
+  transform: translateX(-50%);
+}
+
+.dj-antenna::before {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--yellow);
+  box-shadow: 0 0 28px rgba(251, 191, 36, 0.72);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.dj-head,
+.dj-body,
+.dj-deck {
+  position: absolute;
+  left: 50%;
+  border: 4px solid #1b093d;
+  box-shadow: inset 0 -12px 0 rgba(0, 0, 0, 0.16);
+  transform: translateX(-50%);
+}
+
+.dj-head {
+  top: 56px;
+  display: flex;
+  width: 150px;
+  height: 106px;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  border-radius: 28px;
+  background: var(--violet);
+}
+
+.dj-head span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--yellow);
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.8);
+}
+
+.dj-body {
+  top: 174px;
+  display: flex;
+  width: 184px;
+  height: 116px;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 30px;
+  background: linear-gradient(145deg, var(--violet), #4c1d95);
+}
+
+.dj-body i {
+  width: 24px;
+  height: 44px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.dj-body i.active {
+  background: var(--green);
+  box-shadow: 0 0 22px rgba(52, 211, 153, 0.8);
+}
+
+.dj-deck {
+  bottom: 0;
+  display: flex;
+  width: 230px;
+  height: 72px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 26px;
+  background: #111827;
+}
+
+.dj-deck span {
+  width: 48px;
+  height: 48px;
+  border: 7px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--yellow) 0 20%, #0f172a 22% 100%);
+}
+
+.dj-robot.beat .dj-deck span {
+  animation: deckSpin 420ms linear;
+}
+
+.music-notes span {
+  position: absolute;
+  color: var(--yellow);
+  font-size: 2.6rem;
+  font-weight: 900;
+  opacity: 0;
+  text-shadow: 0 0 18px rgba(251, 191, 36, 0.6);
+}
+
+.music-notes span:nth-child(1) {
+  top: 28%;
+  left: 18%;
+}
+
+.music-notes span:nth-child(2) {
+  top: 20%;
+  right: 22%;
+}
+
+.music-notes span:nth-child(3) {
+  right: 14%;
+  bottom: 30%;
+}
+
+.dj-stage.note-show .music-notes span {
+  animation: noteFloat 680ms ease-out forwards;
+}
+
+.command-pad,
+.sequence-panel,
+.dj-console-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.dj-console-card {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+
+.console-heading h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.command-pad {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 14px;
+}
+
+.command-card {
+  display: grid;
+  min-height: 116px;
+  place-items: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 24px;
+  color: var(--white);
+  cursor: pointer;
+  font-weight: 900;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.command-card:hover,
+.command-card:focus-visible {
+  box-shadow: 0 0 28px rgba(251, 191, 36, 0.26);
+  outline: none;
+  transform: translateY(-3px) scale(1.03);
+}
+
+.command-card span {
+  font-size: 2.2rem;
+}
+
+.command-card.violet {
+  background: linear-gradient(145deg, #8b5cf6, #5b21b6);
+}
+
+.command-card.yellow {
+  background: linear-gradient(145deg, #fbbf24, #f59e0b);
+  color: #321700;
+}
+
+.command-card.green {
+  background: linear-gradient(145deg, #34d399, #059669);
+  color: #06291d;
+}
+
+.command-card.orange {
+  background: linear-gradient(145deg, #ff6b35, #f97316);
+}
+
+.sequence-panel {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+
+.sequence-slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.sequence-slot {
+  display: grid;
+  min-height: 72px;
+  place-items: center;
+  border: 2px dashed rgba(255, 255, 255, 0.22);
+  border-radius: 20px;
+  background: rgba(13, 2, 33, 0.46);
+  color: rgba(255, 255, 255, 0.44);
+  cursor: pointer;
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.sequence-slot.filled {
+  border-style: solid;
+  color: var(--white);
+}
+
+.sequence-slot.light {
+  background: rgba(124, 58, 237, 0.55);
+}
+
+.sequence-slot.beat {
+  background: rgba(251, 191, 36, 0.72);
+  color: #321700;
+}
+
+.sequence-slot.spin {
+  background: rgba(52, 211, 153, 0.58);
+  color: #06291d;
+}
+
+.sequence-slot.wave {
+  background: rgba(255, 107, 53, 0.68);
+}
+
+.sequence-slot.playing {
+  border-color: var(--yellow);
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
+  transform: scale(1.04);
+}
+
+.dj-code {
+  display: grid;
+  gap: 10px;
+}
+
+.game-page .final-cta {
+  margin-bottom: 70px;
+}
+
 .section-heading {
   max-width: 760px;
   margin-bottom: 34px;
@@ -1030,9 +1508,87 @@ button {
   }
 }
 
+@keyframes djLightSweep {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: rotate(var(--light-angle, 0deg)) scaleY(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: rotate(var(--light-angle, 0deg)) scaleY(1.08);
+  }
+}
+
+@keyframes djBeat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  35% {
+    transform: translateY(-12px) scale(1.04);
+  }
+  65% {
+    transform: translateY(6px) scale(0.98);
+  }
+}
+
+@keyframes djSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes djWave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes deckSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes noteFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.7);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-46px) scale(1.25);
+  }
+}
+
 @media (min-width: 720px) {
   .hero-actions {
     display: flex;
+  }
+
+  .game-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sequence-slots {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .feature-grid,
@@ -1081,6 +1637,24 @@ button {
 
   .hero-actions {
     align-items: center;
+  }
+
+  .robot-dj-hero {
+    gap: 28px;
+  }
+
+  .robot-dj-shell {
+    grid-template-columns: minmax(390px, 0.92fr) minmax(420px, 1fr);
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .dj-stage {
+    min-height: 620px;
+  }
+
+  .dj-console-card {
+    align-content: start;
   }
 
   .level-grid {

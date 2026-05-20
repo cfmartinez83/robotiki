@@ -134,6 +134,146 @@ function initFAQ() {
   });
 }
 
+function initRobotDjGame() {
+  const game = document.querySelector("[data-robot-dj]");
+  if (!game) return;
+
+  const commands = Array.from(document.querySelectorAll("[data-command]"));
+  const slots = Array.from(document.querySelectorAll("[data-sequence-index]"));
+  const playButton = document.querySelector("[data-play-sequence]");
+  const clearButton = document.querySelector("[data-clear-sequence]");
+  const status = document.querySelector("[data-dj-status]");
+  const score = document.querySelector("[data-dj-score]");
+  const level = document.querySelector("[data-dj-level]");
+  const robot = document.querySelector("[data-dj-robot]");
+  const codeLines = Array.from(document.querySelectorAll(".dj-code .code-line"));
+  const bodyLights = Array.from(document.querySelectorAll(".dj-body i"));
+  const sequence = [];
+
+  const labels = {
+    light: "💡",
+    beat: "🥁",
+    spin: "🔁",
+    wave: "👋",
+  };
+
+  function updateSequence(message) {
+    slots.forEach((slot, index) => {
+      const command = sequence[index];
+      slot.className = "sequence-slot";
+      slot.textContent = command ? labels[command] : index + 1;
+
+      if (command) {
+        slot.classList.add("filled", command);
+        slot.setAttribute("aria-label", `Paso ${index + 1}: ${command}`);
+      } else {
+        slot.setAttribute("aria-label", `Paso ${index + 1}: vacío`);
+      }
+    });
+
+    if (playButton) playButton.disabled = sequence.length < 3;
+    if (score) score.textContent = `XP ${sequence.length * 20}`;
+    if (level) level.textContent = sequence.length >= 6 ? "Show listo" : "Nivel 1";
+    if (status) status.textContent = message;
+  }
+
+  function flashClass(element, className, duration = 520) {
+    element?.classList.remove(className);
+    window.requestAnimationFrame(() => {
+      element?.classList.add(className);
+      window.setTimeout(() => element?.classList.remove(className), reducedMotion ? 0 : duration);
+    });
+  }
+
+  function runCommand(command) {
+    bodyLights.forEach((light, index) => {
+      light.classList.toggle("active", command === "light" || index === sequence.length % 3);
+    });
+
+    if (command === "light") {
+      flashClass(game, "light-show", 650);
+    }
+
+    if (command === "beat") {
+      flashClass(robot, "beat", 460);
+      flashClass(game, "note-show", 700);
+    }
+
+    if (command === "spin") {
+      flashClass(robot, "spin", 680);
+    }
+
+    if (command === "wave") {
+      flashClass(robot, "wave", 620);
+      flashClass(game, "note-show", 700);
+    }
+  }
+
+  commands.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (sequence.length >= slots.length) {
+        updateSequence("La secuencia está completa. Ejecutá el show o limpiá para probar otro patrón.");
+        return;
+      }
+
+      sequence.push(button.dataset.command);
+      runCommand(button.dataset.command);
+      updateSequence(sequence.length >= 6 ? "¡Show listo! Ejecutá tu programa." : "Comando agregado. Sumá más pasos.");
+    });
+  });
+
+  slots.forEach((slot) => {
+    slot.addEventListener("click", () => {
+      const index = Number(slot.dataset.sequenceIndex);
+      if (!sequence[index]) return;
+      const removed = sequence.splice(index, 1)[0];
+      updateSequence(`Quitaste ${labels[removed]}. Podés mejorar el patrón.`);
+    });
+  });
+
+  playButton?.addEventListener("click", () => {
+    if (sequence.length < 3) return;
+
+    playButton.disabled = true;
+    game.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
+    codeLines.forEach((line) => line.classList.remove("active"));
+    if (status) status.textContent = "Ejecutando tu programa paso por paso...";
+
+    sequence.forEach((command, index) => {
+      window.setTimeout(
+        () => {
+          slots.forEach((slot) => slot.classList.remove("playing"));
+          slots[index]?.classList.add("playing");
+          codeLines[Math.min(index, codeLines.length - 1)]?.classList.add("active");
+          runCommand(command);
+          if (score) score.textContent = `XP ${120 + (index + 1) * 25}`;
+        },
+        reducedMotion ? 0 : index * 700,
+      );
+    });
+
+    window.setTimeout(
+      () => {
+        slots.forEach((slot) => slot.classList.remove("playing"));
+        if (status) status.textContent = "¡Show completo! Tu robot ejecutó la secuencia como un programa real.";
+        if (score) score.textContent = "XP 300";
+        if (level) level.textContent = "Nivel 2 desbloqueado";
+        playButton.disabled = false;
+      },
+      reducedMotion ? 0 : sequence.length * 700 + 500,
+    );
+  });
+
+  clearButton?.addEventListener("click", () => {
+    sequence.length = 0;
+    codeLines.forEach((line) => line.classList.remove("active"));
+    bodyLights.forEach((light) => light.classList.remove("active"));
+    updateSequence("Elegí comandos para crear tu show.");
+  });
+
+  updateSequence("Elegí comandos para crear tu show.");
+}
+
 function createMaterial(color) {
   return new THREE.MeshToonMaterial({ color });
 }
@@ -369,4 +509,5 @@ initRevealAnimations();
 initCursorFollower();
 initTestimonials();
 initFAQ();
+initRobotDjGame();
 initRobotScene();
