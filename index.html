@@ -28,7 +28,7 @@
 
     <header class="navbar" data-navbar>
       <a class="logo" href="#inicio" aria-label="Ir al inicio de Robotiki">
-        <span class="logo-icon" aria-hidden="true">🤖</span>
+        <span class="logo-icon" aria-hidden="true"><span></span></span>
         <span><strong>Robo</strong><strong class="logo-accent">tiki</strong></span>
       </a>
 
@@ -66,7 +66,7 @@
           <div class="robot-card">
             <canvas id="robot-canvas" aria-label="Robot 3D animado de Robotiki"></canvas>
             <div class="canvas-fallback" data-canvas-fallback>
-              <span>🤖</span>
+              <span class="fallback-robot-icon" aria-hidden="true"></span>
               <p>Robotiki en modo aventura</p>
             </div>
           </div>
@@ -81,9 +81,13 @@
           </p>
           <div class="hero-actions">
             <a class="btn btn-violet glow" href="https://wa.me/5491133917070" target="_blank" rel="noreferrer">
-              🚀 ¡Empezar aventura!
+              <span class="btn-icon icon-btn-rocket" aria-hidden="true"></span>
+              ¡Empezar aventura!
             </a>
-            <a class="btn btn-outline" href="./jugar.html">🎛️ Jugar Robot DJ</a>
+            <a class="btn btn-outline" href="./jugar.html">
+              <span class="btn-icon icon-btn-dj" aria-hidden="true"></span>
+              Jugar Robot DJ
+            </a>
           </div>
           <div class="stats" aria-label="Datos destacados">
             <span>+500 chicos y chicas</span>
@@ -104,21 +108,21 @@
         </div>
         <div class="level-grid stagger">
           <article class="level-card gradient-violet reveal">
-            <div class="level-icon">🚀</div>
+            <div class="level-icon icon-rocket" aria-hidden="true"></div>
             <p class="age">4-5 años</p>
             <h3>Exploradores</h3>
             <p>Juego, creatividad y primer contacto con la tecnología en un entorno cuidado.</p>
             <div class="stars" aria-label="Dificultad 1 de 3"><span>★</span><span>☆</span><span>☆</span></div>
           </article>
           <article class="level-card gradient-cyan reveal">
-            <div class="level-icon">🛠️</div>
+            <div class="level-icon icon-wrench" aria-hidden="true"></div>
             <p class="age">6-10 años</p>
             <h3>Constructores</h3>
             <p>Construyen y programan robots con metodología LEGO y competencias del siglo XXI.</p>
             <div class="stars" aria-label="Dificultad 2 de 3"><span>★</span><span>★</span><span>☆</span></div>
           </article>
           <article class="level-card gradient-rose reveal">
-            <div class="level-icon">💡</div>
+            <div class="level-icon icon-bulb" aria-hidden="true"></div>
             <p class="age">10-14 años</p>
             <h3>Inventores</h3>
             <p>Proyectos tecnológicos más complejos, programación avanzada y desafíos reales.</p>
@@ -137,8 +141,8 @@
           <div class="track-node done"><span>1</span><strong>Explorador</strong></div>
           <div class="track-node done"><span>2</span><strong>Constructor</strong></div>
           <div class="track-node current"><span>3</span><strong>Inventor</strong></div>
-          <div class="track-node future"><span>4</span><strong>Campeón</strong></div>
-          <div class="track-node future"><span>5</span><strong>Pro</strong></div>
+          <div class="track-node future"><span>4</span><strong>Genio</strong></div>
+          <div class="track-node future"><span>5</span><strong>Campeón</strong></div>
         </div>
       </section>
 
@@ -149,22 +153,22 @@
         </div>
         <div class="feature-grid stagger">
           <article class="feature-card reveal">
-            <span>🧱</span>
+            <span class="feature-icon icon-lego" aria-hidden="true"></span>
             <h3>LEGO oficial</h3>
             <p>Materiales originales. Sin imitaciones.</p>
           </article>
           <article class="feature-card reveal">
-            <span>👾</span>
+            <span class="feature-icon icon-group" aria-hidden="true"></span>
             <h3>Grupos reducidos</h3>
             <p>Atención personalizada real y actividad adaptada a cada edad.</p>
           </article>
           <article class="feature-card reveal">
-            <span>📍</span>
+            <span class="feature-icon icon-pin" aria-hidden="true"></span>
             <h3>6 sedes en AMBA</h3>
             <p>Palermo, Belgrano, Devoto, Vicente López, San Isidro, Villa Ballester.</p>
           </article>
           <article class="feature-card reveal">
-            <span>🏆</span>
+            <span class="feature-icon icon-trophy" aria-hidden="true"></span>
             <h3>Torneos reales</h3>
             <p>Competencias nacionales de robótica.</p>
           </article>
@@ -177,11 +181,11 @@
           <h2>Habilidades reales para crear, pensar y resolver</h2>
         </div>
         <div class="learning-grid stagger">
-          <article class="learning-card reveal"><span>🤖</span><strong>Robótica con LEGO</strong></article>
-          <article class="learning-card reveal"><span>💻</span><strong>Programación adaptada a cada edad</strong></article>
-          <article class="learning-card reveal"><span>🧠</span><strong>Pensamiento lógico</strong></article>
-          <article class="learning-card reveal"><span>🤝</span><strong>Creatividad y trabajo en equipo</strong></article>
-          <article class="learning-card reveal"><span>🧩</span><strong>Resolución de problemas reales</strong></article>
+          <article class="learning-card reveal"><span class="learning-icon icon-robot" aria-hidden="true"></span><strong>Robótica con LEGO</strong></article>
+          <article class="learning-card reveal"><span class="learning-icon icon-code" aria-hidden="true"></span><strong>Programación adaptada a cada edad</strong></article>
+          <article class="learning-card reveal"><span class="learning-icon icon-brain" aria-hidden="true"></span><strong>Pensamiento lógico</strong></article>
+          <article class="learning-card reveal"><span class="learning-icon icon-team" aria-hidden="true"></span><strong>Creatividad y trabajo en equipo</strong></article>
+          <article class="learning-card reveal"><span class="learning-icon icon-puzzle" aria-hidden="true"></span><strong>Resolución de problemas reales</strong></article>
         </div>
       </section>
 
@@ -258,7 +262,7 @@
 
       <section class="section final-cta reveal">
         <div class="mini-robot" aria-hidden="true">
-          <span>🤖</span>
+          <span class="mini-robot-icon"></span>
         </div>
         <div>
           <h2>¿Listo para la primera misión?</h2>
@@ -278,7 +282,7 @@
     <footer class="footer">
       <div>
         <a class="logo" href="#inicio" aria-label="Robotiki">
-          <span class="logo-icon" aria-hidden="true">🤖</span>
+          <span class="logo-icon" aria-hidden="true"><span></span></span>
           <span><strong>Robo</strong><strong class="logo-accent">tiki</strong></span>
         </a>
         <p>Robotiki — imagina tu futuro</p>

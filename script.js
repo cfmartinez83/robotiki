@@ -155,17 +155,17 @@ function initRobotDjGame() {
   let soundEnabled = false;
 
   const labels = {
-    light: "💡",
-    beat: "🥁",
-    spin: "🔁",
-    wave: "👋",
+    light: "luz violeta",
+    beat: "beat LEGO",
+    spin: "girar robot",
+    wave: "saludar",
   };
 
   function updateSequence(message) {
     slots.forEach((slot, index) => {
       const command = sequence[index];
       slot.className = "sequence-slot";
-      slot.textContent = command ? labels[command] : index + 1;
+      slot.textContent = command ? "" : index + 1;
 
       if (command) {
         slot.classList.add("filled", command);
