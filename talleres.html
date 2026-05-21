@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Talleres de Robotiki por edad: Exploradores, Constructores e Inventores. Robótica, programación, proyectos STEAM y metodología de aprendizaje haciendo."
+    />
+    <meta name="theme-color" content="#0d0221" />
+    <title>Talleres | Robotiki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="cursor-follower" aria-hidden="true"></div>
+
+    <header class="navbar" data-navbar>
+      <a class="logo" href="./index.html" aria-label="Ir al inicio de Robotiki">
+        <span class="logo-icon" aria-hidden="true"><span></span></span>
+        <span><strong>Robo</strong><strong class="logo-accent">tiki</strong></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegación principal">
+        <a href="./index.html">Inicio</a>
+        <a href="./talleres.html">Talleres</a>
+        <a href="./experiencias.html">Experiencias</a>
+        <a href="./contacto.html">Contacto</a>
+        <a href="./jugar.html">Robot DJ</a>
+      </nav>
+
+      <a class="btn btn-orange desktop-cta" href="https://wa.me/5491133917070" target="_blank" rel="noreferrer">
+        ¡Quiero probar!
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="mobile-nav" aria-label="Navegación mobile" data-mobile-nav>
+        <a href="./index.html">Inicio</a>
+        <a href="./talleres.html">Talleres</a>
+        <a href="./experiencias.html">Experiencias</a>
+        <a href="./contacto.html">Contacto</a>
+        <a href="./jugar.html">Robot DJ</a>
+        <a class="btn btn-orange" href="https://wa.me/5491133917070" target="_blank" rel="noreferrer">
+          ¡Quiero probar!
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section page-hero reveal">
+        <p class="eyebrow">Talleres Robotiki</p>
+        <h1>Experiencias que crecen con cada chico</h1>
+        <p>
+          Los talleres se organizan por edad y trayectoria. Cada alumno empieza desde su nivel,
+          avanza con proyectos guiados y suma desafíos de programación, robótica y pensamiento lógico.
+        </p>
+      </section>
+
+      <section class="section levels">
+        <div class="level-grid stagger">
+          <article class="level-card gradient-violet reveal">
+            <div class="level-icon icon-rocket" aria-hidden="true"></div>
+            <p class="age">4-5 años</p>
+            <h3>Exploradores</h3>
+            <p>
+              A través del juego y la exploración, los más pequeños dan sus primeros pasos en
+              programación y robótica. Trabajan por proyectos temáticos con recursos STEAM,
+              robots de suelo, construcción y creatividad.
+            </p>
+            <div class="stars" aria-label="Dificultad 1 de 3"><span>★</span><span>☆</span><span>☆</span></div>
+          </article>
+          <article class="level-card gradient-cyan reveal">
+            <div class="level-icon icon-wrench" aria-hidden="true"></div>
+            <p class="age">6-10 años</p>
+            <h3>Constructores</h3>
+            <p>
+              Construyen y programan robots con motores, sensores y mecanismos. Exploran robótica,
+              física y mecánica mientras resuelven proyectos que se complejizan durante su recorrido.
+            </p>
+            <div class="stars" aria-label="Dificultad 2 de 3"><span>★</span><span>★</span><span>☆</span></div>
+          </article>
+          <article class="level-card gradient-rose reveal">
+            <div class="level-icon icon-bulb" aria-hidden="true"></div>
+            <p class="age">10-14 años</p>
+            <h3>Inventores</h3>
+            <p>
+              Diseñan, construyen y programan proyectos tecnológicos más complejos, vinculados a
+              situaciones reales, automatización y desafíos como la World Robot Olympiad.
+            </p>
+            <div class="stars" aria-label="Dificultad 3 de 3"><span>★</span><span>★</span><span>★</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section game-track reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Progreso de jugador</p>
+          <h2>Tu camino en Robotiki</h2>
+        </div>
+        <div class="track" data-track>
+          <div class="track-line"><span data-track-progress></span></div>
+          <div class="track-node done"><span>1</span><strong>Explorador</strong></div>
+          <div class="track-node done"><span>2</span><strong>Constructor</strong></div>
+          <div class="track-node current"><span>3</span><strong>Inventor</strong></div>
+          <div class="track-node future"><span>4</span><strong>Genio</strong></div>
+          <div class="track-node future"><span>5</span><strong>Campeón</strong></div>
+        </div>
+      </section>
+
+      <section class="section features">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Metodología</p>
+          <h2>Un recorrido personalizado, práctico y creativo</h2>
+        </div>
+        <div class="method-grid stagger">
+          <article class="method-card reveal">
+            <span class="feature-icon icon-lego" aria-hidden="true"></span>
+            <h3>Aprenden haciendo</h3>
+            <p>Construyen, programan, prueban, se equivocan, corrigen y vuelven a intentar.</p>
+          </article>
+          <article class="method-card reveal">
+            <span class="feature-icon icon-group" aria-hidden="true"></span>
+            <h3>Avance por trayectoria</h3>
+            <p>Cada chico empieza desde su nivel y progresa con proyectos acordes a su recorrido.</p>
+          </article>
+          <article class="method-card reveal">
+            <span class="feature-icon icon-brain" aria-hidden="true"></span>
+            <h3>Pensamiento computacional</h3>
+            <p>Ordenan instrucciones, resuelven problemas y desarrollan lógica con proyectos concretos.</p>
+          </article>
+          <article class="method-card reveal">
+            <span class="feature-icon icon-trophy" aria-hidden="true"></span>
+            <h3>Desafíos reales</h3>
+            <p>Los más avanzados trabajan con automatización, competencias y proyectos colaborativos.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section learning">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Qué aprenden</p>
+          <h2>Habilidades reales para crear, pensar y resolver</h2>
+        </div>
+        <div class="learning-grid stagger">
+          <article class="learning-card reveal"><span class="learning-icon icon-robot" aria-hidden="true"></span><strong>Robótica con LEGO</strong></article>
+          <article class="learning-card reveal"><span class="learning-icon icon-code" aria-hidden="true"></span><strong>Programación adaptada a cada edad</strong></article>
+          <article class="learning-card reveal"><span class="learning-icon icon-brain" aria-hidden="true"></span><strong>Pensamiento lógico</strong></article>
+          <article class="learning-card reveal"><span class="learning-icon icon-team" aria-hidden="true"></span><strong>Creatividad y trabajo en equipo</strong></article>
+          <article class="learning-card reveal"><span class="learning-icon icon-puzzle" aria-hidden="true"></span><strong>Resolución de problemas reales</strong></article>
+        </div>
+      </section>
+
+      <section class="section final-cta reveal">
+        <div class="mini-robot" aria-hidden="true">
+          <span class="mini-robot-icon"></span>
+        </div>
+        <div>
+          <h2>¿Querés saber qué taller corresponde?</h2>
+          <p>Escribinos por WhatsApp y te orientamos según la edad, experiencia y sede más cómoda.</p>
+        </div>
+        <a class="btn btn-white" href="https://wa.me/5491133917070" target="_blank" rel="noreferrer">
+          Consultar por WhatsApp
+        </a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <a class="logo" href="./index.html" aria-label="Robotiki">
+          <span class="logo-icon" aria-hidden="true"><span></span></span>
+          <span><strong>Robo</strong><strong class="logo-accent">tiki</strong></span>
+        </a>
+        <p>Robotiki - imagina tu futuro</p>
+        <div class="footer-contact">
+          <a href="mailto:info@robotiki.com.ar">info@robotiki.com.ar</a>
+          <a href="mailto:robotikiar@gmail.com">robotikiar@gmail.com</a>
+          <a href="tel:+5491133917070">+54 9 11 3391-7070</a>
+          <span>Av. Libertador 747, Vicente López</span>
+          <span>Lunes a viernes de 9:00 a 20:00 hs.</span>
+        </div>
+      </div>
+      <nav aria-label="Links de footer">
+        <a href="./talleres.html">Talleres</a>
+        <a href="./experiencias.html">Experiencias</a>
+        <a href="./contacto.html">Contacto</a>
+        <a href="./jugar.html">Robot DJ</a>
+      </nav>
+      <div class="socials" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/robotiki" target="_blank" rel="noreferrer" aria-label="Instagram">◎</a>
+        <a href="https://www.facebook.com/robotiki" target="_blank" rel="noreferrer" aria-label="Facebook">f</a>
+        <a href="https://wa.me/5491133917070" target="_blank" rel="noreferrer" aria-label="WhatsApp">w</a>
+      </div>
+      <p class="copyright">© 2026 Robotiki. Hecho con imaginación, código y robots.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.15/dist/lenis.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
