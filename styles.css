@@ -1617,6 +1617,7 @@ button {
 
 .level-card,
 .feature-card,
+.method-card,
 .sede-card,
 .testimonial-card,
 .faq-list details {
@@ -1701,6 +1702,7 @@ button {
 
 .level-card h3,
 .feature-card h3,
+.method-card h3,
 .sede-card h3,
 .testimonial-card h3 {
   margin: 0;
@@ -1711,6 +1713,7 @@ button {
 
 .level-card p:not(.age),
 .feature-card p,
+.method-card p,
 .sede-card p,
 .testimonial-card p,
 .faq-list p,
@@ -1820,23 +1823,27 @@ button {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.feature-grid {
+.feature-grid,
+.method-grid {
   display: grid;
   gap: 16px;
 }
 
-.feature-card {
+.feature-card,
+.method-card {
   padding: 26px;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
 
-.feature-card:hover {
+.feature-card:hover,
+.method-card:hover {
   border-color: rgba(251, 191, 36, 0.7);
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-4px);
 }
 
-.feature-card .feature-icon {
+.feature-card .feature-icon,
+.method-card .feature-icon {
   display: grid;
   width: 64px;
   height: 64px;
@@ -1845,6 +1852,12 @@ button {
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.12);
   filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.22));
+}
+
+.method-card {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(251, 191, 36, 0.12), transparent 12rem),
+    var(--glass);
 }
 
 .learning-grid {
@@ -2312,6 +2325,7 @@ button {
   }
 
   .feature-grid,
+  .method-grid,
   .learning-grid,
   .sedes-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2416,6 +2430,10 @@ button {
   }
 
   .feature-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .method-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
