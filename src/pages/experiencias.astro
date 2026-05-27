@@ -72,10 +72,20 @@ function renderWorkshopCard(workshop) {
 }
 
 function renderBrandCard(brand) {
-  const logoUrl = urlForImage(brand.logo)?.width(420).height(220).fit("max").auto("format").url();
-  const content = logoUrl
-    ? `<img src="${escapeHtml(logoUrl)}" alt="${escapeHtml(brand.name)}" loading="lazy" />`
-    : `<strong>${escapeHtml(brand.name)}</strong>`;
+  const logoUrl = urlForImage(brand.logo)?.width(640).height(420).fit("max").auto("format").url();
+  const content = `
+    <span class="brand-media">
+      ${
+        logoUrl
+          ? `<img src="${escapeHtml(logoUrl)}" alt="${escapeHtml(brand.name)}" loading="lazy" />`
+          : `<span class="brand-placeholder">${escapeHtml(brand.name.slice(0, 2).toUpperCase())}</span>`
+      }
+    </span>
+    <span class="brand-copy">
+      <strong>${escapeHtml(brand.name)}</strong>
+      ${brand.website ? `<small>Ver sitio →</small>` : `<small>Marca aliada</small>`}
+    </span>
+  `;
 
   if (brand.website) {
     return `<a class="brand-card reveal" href="${escapeHtml(brand.website)}" target="_blank" rel="noreferrer">${content}</a>`;

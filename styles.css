@@ -2072,37 +2072,73 @@ button {
 
 .brand-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 16px;
 }
 
 .brand-card {
   display: grid;
-  min-height: 116px;
-  place-items: center;
+  gap: 16px;
+  min-height: 210px;
   padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.07);
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(251, 191, 36, 0.1), transparent 11rem),
+    rgba(255, 255, 255, 0.07);
+  box-shadow: 0 20px 58px rgba(0, 0, 0, 0.16);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
 }
 
 .brand-card:hover {
   border-color: rgba(251, 191, 36, 0.6);
   background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 70px rgba(124, 58, 237, 0.22);
   transform: translateY(-4px);
+}
+
+.brand-media {
+  display: grid;
+  min-height: 128px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
 }
 
 .brand-card img {
   display: block;
-  max-width: 100%;
-  max-height: 70px;
+  width: 100%;
+  height: 128px;
   object-fit: contain;
+  padding: 16px;
 }
 
-.brand-card strong {
-  text-align: center;
+.brand-placeholder {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  border-radius: 22px;
+  background: linear-gradient(135deg, var(--violet), var(--orange));
+  color: var(--white);
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+.brand-copy {
+  display: grid;
+  gap: 5px;
+}
+
+.brand-copy strong {
   font-size: 1.12rem;
+  line-height: 1.2;
+}
+
+.brand-copy small {
+  color: var(--yellow);
+  font-size: 0.9rem;
 }
 
 .detail-card,
