@@ -9,6 +9,6 @@ export default defineCliConfig({
     basePath: "/admin",
   },
   deployment: {
-    appId: "s64hm4cvcny9t1azw1o0ydre",
+    appId: "d27fwkdipdg6xjikbcy37wv6",
   },
 });
