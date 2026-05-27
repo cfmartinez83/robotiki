@@ -25,5 +25,10 @@ export function urlForImage(source) {
 
 export async function fetchSanity(query, params = {}, fallback = []) {
   if (!sanityClient) return fallback;
-  return sanityClient.fetch(query, params);
+  try {
+    return await sanityClient.fetch(query, params);
+  } catch (error) {
+    console.warn("Sanity fetch failed. Using fallback content.", error);
+    return fallback;
+  }
 }

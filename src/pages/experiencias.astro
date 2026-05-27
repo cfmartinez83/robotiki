@@ -1,8 +1,123 @@
 ---
 import StaticPage from "../layouts/StaticPage.astro";
 import { readStaticPage } from "../lib/html.js";
+import { fetchSanity, urlForImage } from "../lib/sanity.js";
 
 const page = readStaticPage("experiencias.html");
+
+const [occasionalWorkshops, trustedBrands] = await Promise.all([
+  fetchSanity(
+    `*[_type == "occasionalWorkshop" && isPublished == true] | order(coalesce(date, "9999-12-31") asc, _createdAt desc)[0...6]{
+      title,
+      summary,
+      date,
+      ageRange,
+      schedule,
+      price,
+      image,
+      venue->{name}
+    }`,
+  ),
+  fetchSanity(
+    `*[_type == "brand" && isPublished == true] | order(order asc, name asc)[0...12]{
+      name,
+      website,
+      logo
+    }`,
+  ),
+]);
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function formatDate(value) {
+  if (!value) return "";
+  return new Intl.DateTimeFormat("es-AR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(`${value}T00:00:00`));
+}
+
+function renderWorkshopCard(workshop) {
+  const imageUrl = urlForImage(workshop.image)?.width(900).height(620).fit("crop").auto("format").url();
+  const meta = [
+    formatDate(workshop.date),
+    workshop.venue?.name,
+    workshop.schedule,
+    workshop.ageRange,
+    workshop.price,
+  ].filter(Boolean);
+
+  return `
+    <article class="cms-card reveal">
+      ${
+        imageUrl
+          ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(workshop.title)}" loading="lazy" />`
+          : ""
+      }
+      <div>
+        <h3>${escapeHtml(workshop.title)}</h3>
+        ${workshop.summary ? `<p>${escapeHtml(workshop.summary)}</p>` : ""}
+        ${meta.length ? `<div class="cms-meta">${meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>` : ""}
+      </div>
+    </article>
+  `;
+}
+
+function renderBrandCard(brand) {
+  const logoUrl = urlForImage(brand.logo)?.width(420).height(220).fit("max").auto("format").url();
+  const content = logoUrl
+    ? `<img src="${escapeHtml(logoUrl)}" alt="${escapeHtml(brand.name)}" loading="lazy" />`
+    : `<strong>${escapeHtml(brand.name)}</strong>`;
+
+  if (brand.website) {
+    return `<a class="brand-card reveal" href="${escapeHtml(brand.website)}" target="_blank" rel="noreferrer">${content}</a>`;
+  }
+
+  return `<div class="brand-card reveal">${content}</div>`;
+}
+
+const cmsSections = [
+  occasionalWorkshops.length
+    ? `
+      <section class="section cms-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Talleres ocasionales</p>
+          <h2>Próximas propuestas especiales</h2>
+        </div>
+        <div class="cms-grid stagger">
+          ${occasionalWorkshops.map(renderWorkshopCard).join("")}
+        </div>
+      </section>
+    `
+    : "",
+  trustedBrands.length
+    ? `
+      <section class="section cms-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Marcas que confían</p>
+          <h2>Instituciones y empresas que viven Robotiki</h2>
+        </div>
+        <div class="brand-grid stagger">
+          ${trustedBrands.map(renderBrandCard).join("")}
+        </div>
+      </section>
+    `
+    : "",
+]
+  .filter(Boolean)
+  .join("");
+
+const body = cmsSections
+  ? page.body.replace('<section class="section final-cta reveal">', `${cmsSections}<section class="section final-cta reveal">`)
+  : page.body;
 ---
 
-<StaticPage {...page} />
+<StaticPage {...page} body={body} />
