@@ -6,9 +6,17 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "sanity:dev": "sanity dev --host 0.0.0.0",
+    "sanity:deploy": "sanity deploy"
   },
   "devDependencies": {
     "astro": "^6.3.8"
+  },
+  "dependencies": {
+    "@sanity/client": "^7.13.0",
+    "@sanity/image-url": "^1.2.0",
+    "@sanity/vision": "^4.15.0",
+    "sanity": "^4.15.0"
   }
 }
