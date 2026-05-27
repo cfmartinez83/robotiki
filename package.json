@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "vercel-build": "if [ -n \"$SANITY_AUTH_TOKEN\" ]; then npm run sanity:schema:deploy; else echo \"Skipping Sanity schema deploy: SANITY_AUTH_TOKEN is not set\"; fi && astro build",
+    "vercel-build": "if [ -n \"$SANITY_AUTH_TOKEN\" ]; then npm run sanity:studio:register || echo \"Skipping Sanity external registration: already registered or unavailable\"; npm run sanity:schema:deploy; else echo \"Skipping Sanity schema deploy: SANITY_AUTH_TOKEN is not set\"; fi && astro build",
     "preview": "astro preview",
     "sanity:dev": "sanity dev --host 0.0.0.0",
     "sanity:deploy": "sanity deploy",
-    "sanity:schema:deploy": "sanity schema deploy"
+    "sanity:schema:deploy": "sanity schema deploy",
+    "sanity:studio:register": "sanity deploy --external --url https://robotiki.vercel.app/admin --yes"
   },
   "devDependencies": {
     "astro": "^6.3.8"

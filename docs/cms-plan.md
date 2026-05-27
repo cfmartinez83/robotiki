@@ -27,9 +27,9 @@ Then add the deployed Vercel domain to Sanity CORS settings so Astro can read
 published content during builds.
 
 Because the Studio is self-hosted under `/admin`, Vercel runs
-`sanity schema deploy` before the Astro build whenever `SANITY_AUTH_TOKEN` is
-available. Generate the token in Sanity Manage with deploy permissions, then
-store it only in Vercel environment variables.
+`sanity deploy --external` and `sanity schema deploy` before the Astro build
+whenever `SANITY_AUTH_TOKEN` is available. Generate the token in Sanity Manage
+with deploy permissions, then store it only in Vercel environment variables.
 
 ## Local development
 
