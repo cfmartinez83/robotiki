@@ -21,9 +21,15 @@ Create a Sanity project and add these variables in Vercel:
 - `PUBLIC_SANITY_PROJECT_ID`
 - `PUBLIC_SANITY_DATASET` (usually `production`)
 - `PUBLIC_SANITY_API_VERSION` (example: `2026-05-27`)
+- `SANITY_AUTH_TOKEN` (deploy token used by Vercel to sync Studio schemas)
 
 Then add the deployed Vercel domain to Sanity CORS settings so Astro can read
 published content during builds.
+
+Because the Studio is self-hosted under `/admin`, Vercel runs
+`sanity schema deploy` before the Astro build whenever `SANITY_AUTH_TOKEN` is
+available. Generate the token in Sanity Manage with deploy permissions, then
+store it only in Vercel environment variables.
 
 ## Local development
 
