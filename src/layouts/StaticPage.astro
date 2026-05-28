@@ -1,4 +1,6 @@
 ---
+import Analytics from "@vercel/analytics/astro";
+
 const { title, description, bodyClass = "", body } = Astro.props;
 ---
 
@@ -17,6 +19,7 @@ const { title, description, bodyClass = "", body } = Astro.props;
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <Analytics />
   </head>
   <body class={bodyClass} set:html={body}></body>
 </html>
