@@ -7,12 +7,55 @@ Sanity is the editorial CMS for content that changes often:
 - occasional workshops
 - experiences and seasonal events
 - trusted brands
-- values/prices
+- venues
 - available schedules
+- values/prices
 - gallery images
 
 Sanity should become the source of truth for editable content, while Astro keeps
 generating static HTML for SEO and performance on Vercel.
+
+## Dynamic sections
+
+The site keeps fixed pages and fixed visual structure. Sanity only feeds cards
+and editable blocks inside those pages.
+
+### `experiencias.html`
+
+Rendered from `src/pages/experiencias.astro`.
+
+- `occasionalWorkshop`: powers the "Talleres ocasionales" block.
+- `experience`: replaces the static "Que hacemos" cards when published
+  experiences exist.
+- `brand`: powers the "Marcas que confian" block.
+
+If Sanity returns no published `experience` documents, the original static
+experience cards remain visible as fallback content.
+
+### `contacto.html`
+
+Rendered from `src/pages/contacto.astro`.
+
+- `venue`: replaces the static "Sedes Robotiki" grid when published venues
+  exist.
+- `schedule`: replaces the static "Horarios orientativos" grid when published
+  schedules exist.
+
+If Sanity returns no published venues or schedules, the original static sections
+remain visible as fallback content.
+
+The navigation label is "Sedes y contacto" and points to `contacto.html`.
+Internal CTAs can still point to `contacto.html#sedes`.
+
+## Current editorial model
+
+- `occasionalWorkshop`: title, summary, date, age range, venue, schedule, price,
+  image, featured flag, publish flag.
+- `experience`: title, category, summary, body, image, gallery, event date,
+  featured flag, publish flag.
+- `brand`: name, logo, website, order, publish flag.
+- `venue`: name, zone, address, Google Maps URL, WhatsApp, publish flag.
+- `schedule`: level, venue, day, time, notes, publish flag.
 
 ## Setup required
 
@@ -34,16 +77,28 @@ deploy permissions, then store it only in Vercel environment variables.
 
 ## Local development
 
-Use Docker instead of installing dependencies locally:
+Use Docker instead of installing dependencies locally. The project includes
+`Dockerfile` and `docker-compose.yml` for this.
 
 ```sh
-docker run --rm -it -v "$PWD":/app -v /app/node_modules -w /app -p 4321:4321 node:22-alpine sh
-npm ci
-npm run dev -- --host 0.0.0.0
+docker compose up web
 ```
 
-For the Sanity Studio:
+Then open:
+
+- `http://localhost:4321/`
+- `http://localhost:4321/experiencias`
+- `http://localhost:4321/contacto`
+
+In Astro dev mode, page routes are served without `.html`. The static build
+still outputs `.html` files for Vercel, so production URLs like
+`/experiencias.html` and `/contacto.html` remain valid.
+
+Run a production build check inside Docker with:
 
 ```sh
-npm run sanity:dev
+docker compose run --rm web sh -lc "npm ci && npm run build"
 ```
+
+Docker is only for local development and validation. Vercel continues to use
+`vercel.json` and `npm run vercel-build`.

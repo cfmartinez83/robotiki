@@ -1,0 +1,9 @@
+.astro
+.DS_Store
+.git
+dist
+node_modules
+
+.env
+.env.local
+.env.*.local

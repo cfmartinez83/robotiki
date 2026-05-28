@@ -1,0 +1,23 @@
+# Dev server:
+#   docker compose up web
+#
+# Production build check:
+#   docker compose run --rm web sh -lc "npm ci && npm run build"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    ports:
+      - "4321:4321"
+    volumes:
+      - .:/app
+      - robotiki_node_modules:/app/node_modules
+    environment:
+      PUBLIC_SANITY_PROJECT_ID: ${PUBLIC_SANITY_PROJECT_ID:-f95ac08s}
+      PUBLIC_SANITY_DATASET: ${PUBLIC_SANITY_DATASET:-production}
+      PUBLIC_SANITY_API_VERSION: ${PUBLIC_SANITY_API_VERSION:-2026-05-27}
+
+volumes:
+  robotiki_node_modules:

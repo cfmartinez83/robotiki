@@ -1,8 +1,141 @@
 ---
 import StaticPage from "../layouts/StaticPage.astro";
 import { readStaticPage } from "../lib/html.js";
+import { fetchSanity } from "../lib/sanity.js";
 
 const page = readStaticPage("contacto.html");
+
+const [venues, schedules] = await Promise.all([
+  fetchSanity(
+    `*[_type == "venue" && isPublished == true] | order(name asc){
+      name,
+      zone,
+      address,
+      mapUrl,
+      whatsapp
+    }`,
+  ),
+  fetchSanity(
+    `*[_type == "schedule" && isPublished == true] | order(level asc, venue->name asc, day asc, time asc){
+      level,
+      day,
+      time,
+      notes,
+      venue->{name, zone}
+    }`,
+  ),
+]);
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function replaceSection(body, startMarker, replacement) {
+  const startIndex = body.indexOf(startMarker);
+  if (startIndex === -1) return body;
+
+  const endIndex = body.indexOf("</section>", startIndex);
+  if (endIndex === -1) return body;
+
+  return `${body.slice(0, startIndex)}${replacement}${body.slice(endIndex + "</section>".length)}`;
+}
+
+function renderVenueCard(venue) {
+  const details = [venue.zone, venue.address].filter(Boolean).join(" · ");
+  const content = `
+    <span></span>
+    <div>
+      <h3>${escapeHtml(venue.name)}</h3>
+      ${details ? `<p>${escapeHtml(details)}</p>` : ""}
+    </div>
+  `;
+
+  if (venue.mapUrl) {
+    return `<a class="sede-card reveal" href="${escapeHtml(venue.mapUrl)}" target="_blank" rel="noreferrer">${content}</a>`;
+  }
+
+  return `<article class="sede-card reveal">${content}</article>`;
+}
+
+function renderScheduleCard([level, items]) {
+  return `
+    <article class="schedule-card reveal">
+      <h3>${escapeHtml(level)}</h3>
+      ${items
+        .map((item) => {
+          const venue = item.venue?.name ? `${item.venue.name}: ` : "";
+          const timing = [item.day, item.time].filter(Boolean).join(" ");
+          const notes = item.notes ? ` ${item.notes}` : "";
+          return `<p>${escapeHtml(`${venue}${timing}${notes}`.trim())}</p>`;
+        })
+        .join("")}
+    </article>
+  `;
+}
+
+const venuesSection = venues.length
+  ? `
+      <section class="section sedes" id="sedes">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Sedes Robotiki</p>
+          <h2>Estamos presentes en distintas zonas</h2>
+        </div>
+        <div class="sedes-grid stagger">
+          ${venues.map(renderVenueCard).join("")}
+        </div>
+        <div class="center reveal">
+          <a
+            class="btn btn-outline"
+            href="https://www.google.com/maps/search/Robotiki+Buenos+Aires"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Ver sedes en el mapa →
+          </a>
+        </div>
+      </section>
+    `
+  : "";
+
+const schedulesByLevel = schedules.reduce((groups, schedule) => {
+  const level = schedule.level || "Horarios";
+  if (!groups.has(level)) groups.set(level, []);
+  groups.get(level).push(schedule);
+  return groups;
+}, new Map());
+
+const schedulesSection = schedules.length
+  ? `
+      <section class="section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Horarios orientativos</p>
+          <h2>Talleres por sede y nivel</h2>
+        </div>
+        <div class="schedule-grid stagger">
+          ${Array.from(schedulesByLevel.entries()).map(renderScheduleCard).join("")}
+        </div>
+      </section>
+    `
+  : "";
+
+const bodyWithVenues = venuesSection
+  ? replaceSection(page.body, '<section class="section sedes" id="sedes">', venuesSection)
+  : page.body;
+
+const body = schedulesSection
+  ? replaceSection(
+      bodyWithVenues,
+      `<section class="section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Horarios orientativos</p>`,
+      schedulesSection,
+    )
+  : bodyWithVenues;
 ---
 
-<StaticPage {...page} />
+<StaticPage {...page} body={body} />

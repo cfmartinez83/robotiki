@@ -5,7 +5,7 @@ import { fetchSanity, urlForImage } from "../lib/sanity.js";
 
 const page = readStaticPage("experiencias.html");
 
-const [occasionalWorkshops, trustedBrands] = await Promise.all([
+const [occasionalWorkshops, experiences, trustedBrands] = await Promise.all([
   fetchSanity(
     `*[_type == "occasionalWorkshop" && isPublished == true] | order(coalesce(date, "9999-12-31") asc, _createdAt desc)[0...6]{
       title,
@@ -16,6 +16,15 @@ const [occasionalWorkshops, trustedBrands] = await Promise.all([
       price,
       image,
       venue->{name}
+    }`,
+  ),
+  fetchSanity(
+    `*[_type == "experience" && isPublished == true] | order(isFeatured desc, coalesce(eventDate, "9999-12-31") asc, _createdAt desc)[0...8]{
+      title,
+      category,
+      summary,
+      eventDate,
+      image
     }`,
   ),
   fetchSanity(
@@ -71,6 +80,26 @@ function renderWorkshopCard(workshop) {
   `;
 }
 
+function renderExperienceCard(experience) {
+  const imageUrl = urlForImage(experience.image)?.width(900).height(620).fit("crop").auto("format").url();
+  const meta = [categoryLabels[experience.category], formatDate(experience.eventDate)].filter(Boolean);
+
+  return `
+    <article class="cms-card reveal">
+      ${
+        imageUrl
+          ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(experience.title)}" loading="lazy" />`
+          : ""
+      }
+      <div>
+        <h3>${escapeHtml(experience.title)}</h3>
+        ${experience.summary ? `<p>${escapeHtml(experience.summary)}</p>` : ""}
+        ${meta.length ? `<div class="cms-meta">${meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>` : ""}
+      </div>
+    </article>
+  `;
+}
+
 function renderBrandCard(brand) {
   const logoUrl = urlForImage(brand.logo)?.width(640).height(420).fit("max").auto("format").url();
   const content = `
@@ -93,6 +122,39 @@ function renderBrandCard(brand) {
 
   return `<div class="brand-card reveal">${content}</div>`;
 }
+
+function replaceSection(body, startMarker, replacement) {
+  const startIndex = body.indexOf(startMarker);
+  if (startIndex === -1) return body;
+
+  const endIndex = body.indexOf("</section>", startIndex);
+  if (endIndex === -1) return body;
+
+  return `${body.slice(0, startIndex)}${replacement}${body.slice(endIndex + "</section>".length)}`;
+}
+
+const categoryLabels = {
+  competition: "Competencia",
+  event: "Evento",
+  school: "Escuela",
+  company: "Empresa",
+  birthday: "Cumple Robotiki",
+  seasonal: "Fecha especial",
+};
+
+const dynamicExperiencesSection = experiences.length
+  ? `
+      <section class="section cms-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Experiencias</p>
+          <h2>Propuestas especiales para distintos contextos</h2>
+        </div>
+        <div class="cms-grid stagger">
+          ${experiences.map(renderExperienceCard).join("")}
+        </div>
+      </section>
+    `
+  : "";
 
 const cmsSections = [
   occasionalWorkshops.length
@@ -125,9 +187,13 @@ const cmsSections = [
   .filter(Boolean)
   .join("");
 
-const body = cmsSections
-  ? page.body.replace('<section class="section final-cta reveal">', `${cmsSections}<section class="section final-cta reveal">`)
+const bodyWithExperiences = dynamicExperiencesSection
+  ? replaceSection(page.body, '<section class="section features">', dynamicExperiencesSection)
   : page.body;
+
+const body = cmsSections
+  ? bodyWithExperiences.replace('<section class="section final-cta reveal">', `${cmsSections}<section class="section final-cta reveal">`)
+  : bodyWithExperiences;
 ---
 
 <StaticPage {...page} body={body} />
