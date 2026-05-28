@@ -1621,6 +1621,14 @@ button {
   line-height: 0.88;
 }
 
+.contact-hero h1 {
+  font-size: clamp(2.6rem, 6.4vw, 5.6rem);
+}
+
+.experiences-hero h1 {
+  font-size: clamp(2.7rem, 6.6vw, 5.8rem);
+}
+
 .page-hero > p:not(.eyebrow) {
   max-width: 760px;
   margin: 0;
