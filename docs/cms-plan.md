@@ -20,6 +20,15 @@ generating static HTML for SEO and performance on Vercel.
 The site keeps fixed pages and fixed visual structure. Sanity only feeds cards
 and editable blocks inside those pages.
 
+`siteSettings` is treated as a singleton in the Studio. Editors should see
+`Configuración del sitio` as one form, not as a list where multiple settings
+documents can be created. The Studio structure points to the existing settings
+document and removes `siteSettings` from the "new document" templates.
+
+Existing duplicate settings documents should not be used for new content. Once
+the singleton has been verified in production, old duplicate settings documents
+can be unpublished or deleted from Sanity Manage/Studio.
+
 ### `experiencias.html`
 
 Rendered from `src/pages/experiencias.astro`.
@@ -46,6 +55,13 @@ remain visible as fallback content.
 
 The navigation label is "Sedes y contacto" and points to `contacto.html`.
 Internal CTAs can still point to `contacto.html#sedes`.
+
+### `talleres.html`
+
+The settings singleton now includes `workshopsSection`, which will hold the
+editable title, eyebrow, intro text, and visibility flag for the upcoming
+dynamic workshops section. Workshop cards should live in their own repeatable
+document type instead of inside settings.
 
 ## Current editorial model
 
