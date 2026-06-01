@@ -46,7 +46,7 @@ function replaceSection(body, startMarker, replacement) {
 }
 
 function renderVenueCard(venue) {
-  const details = [venue.zone, venue.address].filter(Boolean).join(" · ");
+  const details = venue.address || venue.zone;
   const content = `
     <span></span>
     <div>
@@ -70,11 +70,11 @@ function normalizeText(value = "") {
 }
 
 const mapPins = [
-  {label: "Belgrano", matches: ["belgrano", "monroe"], x: 360, y: 270},
-  {label: "Vicente López", matches: ["vicente lopez", "libertador"], x: 480, y: 205},
-  {label: "Boulogne / San Isidro", matches: ["boulogne", "san isidro", "guayaquil"], x: 610, y: 165},
-  {label: "Villa Devoto", matches: ["villa devoto", "devoto", "salvador maria del carril"], x: 290, y: 345},
-  {label: "Villa Ballester", matches: ["villa ballester", "ballester", "lacroze"], x: 540, y: 330},
+  {label: "Belgrano", matches: ["belgrano", "monroe"], x: "39%", y: "49%"},
+  {label: "Vicente López", matches: ["vicente lopez", "libertador"], x: "42%", y: "34%"},
+  {label: "Boulogne / San Isidro", matches: ["boulogne", "san isidro", "guayaquil"], x: "25%", y: "23%"},
+  {label: "Villa Devoto", matches: ["villa devoto", "devoto", "salvador maria del carril"], x: "44%", y: "75%"},
+  {label: "Villa Ballester", matches: ["villa ballester", "ballester", "lacroze"], x: "29%", y: "42%"},
 ];
 
 function findVenueForPin(pin) {
@@ -97,47 +97,36 @@ function renderMapPin(pin) {
     : `Abrir ${label} en Google Maps`;
 
   return `
-    <a class="map-pin-link" href="${escapeHtml(href)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(ariaLabel)}">
-      <g class="map-pin" transform="translate(${pin.x} ${pin.y})" filter="url(#pinGlow)">
-        <path d="M0 -32 C19 -32 34 -17 34 2 C34 28 0 58 0 58 C0 58 -34 28 -34 2 C-34 -17 -19 -32 0 -32Z" />
-        <circle cx="0" cy="2" r="11" />
-        <text x="44" y="6">${escapeHtml(label)}</text>
-      </g>
+    <a class="map-pin-link" style="--pin-x: ${pin.x}; --pin-y: ${pin.y};" href="${escapeHtml(href)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(ariaLabel)}">
+      <span class="map-pin-dot" aria-hidden="true"></span>
+      <span class="map-pin-label">${escapeHtml(label)}</span>
     </a>
   `;
 }
 
+function renderMapTiles() {
+  const rows = [1232, 1233, 1234];
+  const columns = [689, 690, 691, 692];
+
+  return rows
+    .flatMap((y) =>
+      columns.map(
+        (x) =>
+          `<img class="venues-map-tile" src="https://tile.openstreetmap.org/11/${x}/${y}.png" alt="" loading="lazy" aria-hidden="true" />`,
+      ),
+    )
+    .join("");
+}
+
 function renderVenuesMap() {
   return `
-    <figure class="venues-map reveal" aria-label="Mapa ilustrado de sedes Robotiki">
-      <svg viewBox="0 0 900 520" role="img" aria-labelledby="venues-map-title venues-map-desc">
-        <title id="venues-map-title">Mapa ilustrado de sedes Robotiki</title>
-        <desc id="venues-map-desc">Ubicación aproximada de las sedes en CABA y GBA Norte.</desc>
-        <defs>
-          <linearGradient id="mapBg" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stop-color="#27105f" />
-            <stop offset="100%" stop-color="#0f0a2e" />
-          </linearGradient>
-          <filter id="pinGlow" x="-40%" y="-40%" width="180%" height="180%">
-            <feGaussianBlur stdDeviation="7" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-        <rect width="900" height="520" rx="34" fill="url(#mapBg)" />
-        <path d="M150 390 C230 310 240 230 310 170 C395 96 500 70 650 105 C760 130 805 210 760 306 C715 402 610 432 480 420 C345 408 250 455 150 390Z" fill="rgba(255,255,255,0.09)" stroke="rgba(255,255,255,0.18)" stroke-width="3" />
-        <path d="M240 388 C330 340 375 250 425 172 C470 102 558 102 635 142" fill="none" stroke="rgba(52,211,153,0.35)" stroke-width="10" stroke-linecap="round" />
-        <path d="M250 242 C360 250 472 268 652 258" fill="none" stroke="rgba(251,191,36,0.28)" stroke-width="7" stroke-linecap="round" />
-        <g class="map-zone">
-          <text x="260" y="440">CABA</text>
-          <text x="610" y="86">GBA Norte</text>
-          <text x="590" y="460">Ubicaciones aproximadas</text>
-        </g>
+    <figure class="venues-map reveal" aria-label="Mapa real de sedes Robotiki">
+      <div class="venues-map-frame">
+        <div class="venues-map-tiles" role="img" aria-label="Mapa de CABA y GBA Norte con sedes Robotiki">
+          ${renderMapTiles()}
+        </div>
         ${mapPins.map(renderMapPin).join("")}
-      </svg>
-      <figcaption>Mapa ilustrativo de zonas: tocá una sede para abrir su dirección en Google Maps.</figcaption>
+      </div>
     </figure>
   `;
 }
@@ -173,19 +162,11 @@ const venuesSection = venues.length
           <p class="eyebrow">Sedes Robotiki</p>
           <h2>Estamos presentes en distintas zonas</h2>
         </div>
-        <div class="sedes-grid stagger">
-          ${venues.map(renderVenueCard).join("")}
-        </div>
-        ${renderVenuesMap()}
-        <div class="center reveal">
-          <a
-            class="btn btn-outline"
-            href="https://www.google.com/maps/search/Robotiki+Buenos+Aires"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Ver sedes en el mapa →
-          </a>
+        <div class="venues-layout">
+          <div class="sedes-grid stagger">
+            ${venues.map(renderVenueCard).join("")}
+          </div>
+          ${renderVenuesMap()}
         </div>
       </section>
     `

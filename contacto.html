@@ -77,88 +77,54 @@
           <p class="eyebrow">Sedes Robotiki</p>
           <h2>Estamos presentes en distintas zonas</h2>
         </div>
-        <div class="sedes-grid stagger">
-          <article class="sede-card reveal"><span></span><div><h3>Palermo</h3><p>CABA</p></div></article>
-          <article class="sede-card reveal"><span></span><div><h3>Belgrano</h3><p>CABA</p></div></article>
-          <article class="sede-card reveal"><span></span><div><h3>Villa Devoto</h3><p>CABA</p></div></article>
-          <article class="sede-card reveal"><span></span><div><h3>Vicente López</h3><p>GBA Norte</p></div></article>
-          <article class="sede-card reveal"><span></span><div><h3>San Isidro</h3><p>GBA Norte</p></div></article>
-          <article class="sede-card reveal"><span></span><div><h3>Villa Ballester</h3><p>GBA Norte</p></div></article>
-          <article class="sede-card reveal"><span></span><div><h3>Boulogne</h3><p>GBA Norte</p></div></article>
-        </div>
-        <figure class="venues-map reveal" aria-label="Mapa ilustrado de sedes Robotiki">
-          <svg viewBox="0 0 900 520" role="img" aria-labelledby="venues-map-title venues-map-desc">
-            <title id="venues-map-title">Mapa ilustrado de sedes Robotiki</title>
-            <desc id="venues-map-desc">Ubicación aproximada de las sedes en CABA y GBA Norte.</desc>
-            <defs>
-              <linearGradient id="mapBg" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stop-color="#27105f" />
-                <stop offset="100%" stop-color="#0f0a2e" />
-              </linearGradient>
-              <filter id="pinGlow" x="-40%" y="-40%" width="180%" height="180%">
-                <feGaussianBlur stdDeviation="7" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-            <rect width="900" height="520" rx="34" fill="url(#mapBg)" />
-            <path d="M150 390 C230 310 240 230 310 170 C395 96 500 70 650 105 C760 130 805 210 760 306 C715 402 610 432 480 420 C345 408 250 455 150 390Z" fill="rgba(255,255,255,0.09)" stroke="rgba(255,255,255,0.18)" stroke-width="3" />
-            <path d="M240 388 C330 340 375 250 425 172 C470 102 558 102 635 142" fill="none" stroke="rgba(52,211,153,0.35)" stroke-width="10" stroke-linecap="round" />
-            <path d="M250 242 C360 250 472 268 652 258" fill="none" stroke="rgba(251,191,36,0.28)" stroke-width="7" stroke-linecap="round" />
-            <g class="map-zone">
-              <text x="260" y="440">CABA</text>
-              <text x="610" y="86">GBA Norte</text>
-              <text x="590" y="460">Ubicaciones aproximadas</text>
-            </g>
-            <a class="map-pin-link" href="https://www.google.com/maps/search/?api=1&query=Monroe%202764%20CABA" target="_blank" rel="noreferrer" aria-label="Abrir Belgrano en Google Maps">
-              <g class="map-pin" transform="translate(360 270)" filter="url(#pinGlow)">
-                <path d="M0 -32 C19 -32 34 -17 34 2 C34 28 0 58 0 58 C0 58 -34 28 -34 2 C-34 -17 -19 -32 0 -32Z" />
-                <circle cx="0" cy="2" r="11" />
-                <text x="44" y="6">Belgrano</text>
-              </g>
-            </a>
-            <a class="map-pin-link" href="https://www.google.com/maps/search/?api=1&query=Av.%20del%20Libertador%20747%20Vicente%20Lopez%20Buenos%20Aires" target="_blank" rel="noreferrer" aria-label="Abrir Vicente López en Google Maps">
-              <g class="map-pin" transform="translate(480 205)" filter="url(#pinGlow)">
-                <path d="M0 -32 C19 -32 34 -17 34 2 C34 28 0 58 0 58 C0 58 -34 28 -34 2 C-34 -17 -19 -32 0 -32Z" />
-                <circle cx="0" cy="2" r="11" />
-                <text x="44" y="6">Vicente López</text>
-              </g>
-            </a>
-            <a class="map-pin-link" href="https://www.google.com/maps/search/?api=1&query=Guayaquil%20340%20Boulogne%20San%20Isidro%20Buenos%20Aires" target="_blank" rel="noreferrer" aria-label="Abrir Boulogne / San Isidro en Google Maps">
-              <g class="map-pin" transform="translate(610 165)" filter="url(#pinGlow)">
-                <path d="M0 -32 C19 -32 34 -17 34 2 C34 28 0 58 0 58 C0 58 -34 28 -34 2 C-34 -17 -19 -32 0 -32Z" />
-                <circle cx="0" cy="2" r="11" />
-                <text x="44" y="6">Boulogne / San Isidro</text>
-              </g>
-            </a>
-            <a class="map-pin-link" href="https://www.google.com/maps/search/?api=1&query=Av.%20Salvador%20Maria%20del%20Carril%204958%20CABA" target="_blank" rel="noreferrer" aria-label="Abrir Villa Devoto en Google Maps">
-              <g class="map-pin" transform="translate(290 345)" filter="url(#pinGlow)">
-                <path d="M0 -32 C19 -32 34 -17 34 2 C34 28 0 58 0 58 C0 58 -34 28 -34 2 C-34 -17 -19 -32 0 -32Z" />
-                <circle cx="0" cy="2" r="11" />
-                <text x="44" y="6">Villa Devoto</text>
-              </g>
-            </a>
-            <a class="map-pin-link" href="https://www.google.com/maps/search/?api=1&query=Lacroze%204824%20Villa%20Ballester%20Buenos%20Aires" target="_blank" rel="noreferrer" aria-label="Abrir Villa Ballester en Google Maps">
-              <g class="map-pin" transform="translate(540 330)" filter="url(#pinGlow)">
-                <path d="M0 -32 C19 -32 34 -17 34 2 C34 28 0 58 0 58 C0 58 -34 28 -34 2 C-34 -17 -19 -32 0 -32Z" />
-                <circle cx="0" cy="2" r="11" />
-                <text x="44" y="6">Villa Ballester</text>
-              </g>
-            </a>
-          </svg>
-          <figcaption>Mapa ilustrativo de zonas: tocá una sede para abrir su dirección en Google Maps.</figcaption>
-        </figure>
-        <div class="center reveal">
-          <a
-            class="btn btn-outline"
-            href="https://www.google.com/maps/search/Robotiki+Buenos+Aires"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Ver sedes en el mapa →
-          </a>
+        <div class="venues-layout">
+          <div class="sedes-grid stagger">
+            <article class="sede-card reveal"><span></span><div><h3>Palermo</h3><p>CABA</p></div></article>
+            <article class="sede-card reveal"><span></span><div><h3>Belgrano</h3><p>CABA</p></div></article>
+            <article class="sede-card reveal"><span></span><div><h3>Villa Devoto</h3><p>CABA</p></div></article>
+            <article class="sede-card reveal"><span></span><div><h3>Vicente López</h3><p>GBA Norte</p></div></article>
+            <article class="sede-card reveal"><span></span><div><h3>San Isidro</h3><p>GBA Norte</p></div></article>
+            <article class="sede-card reveal"><span></span><div><h3>Villa Ballester</h3><p>GBA Norte</p></div></article>
+            <article class="sede-card reveal"><span></span><div><h3>Boulogne</h3><p>GBA Norte</p></div></article>
+          </div>
+          <figure class="venues-map reveal" aria-label="Mapa real de sedes Robotiki">
+            <div class="venues-map-frame">
+              <div class="venues-map-tiles" role="img" aria-label="Mapa de CABA y GBA Norte con sedes Robotiki">
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/689/1232.png" alt="" loading="lazy" aria-hidden="true" />
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/690/1232.png" alt="" loading="lazy" aria-hidden="true" />
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/691/1232.png" alt="" loading="lazy" aria-hidden="true" />
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/692/1232.png" alt="" loading="lazy" aria-hidden="true" />
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/689/1233.png" alt="" loading="lazy" aria-hidden="true" />
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/690/1233.png" alt="" loading="lazy" aria-hidden="true" />
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/691/1233.png" alt="" loading="lazy" aria-hidden="true" />
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/692/1233.png" alt="" loading="lazy" aria-hidden="true" />
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/689/1234.png" alt="" loading="lazy" aria-hidden="true" />
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/690/1234.png" alt="" loading="lazy" aria-hidden="true" />
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/691/1234.png" alt="" loading="lazy" aria-hidden="true" />
+                <img class="venues-map-tile" src="https://tile.openstreetmap.org/11/692/1234.png" alt="" loading="lazy" aria-hidden="true" />
+              </div>
+              <a class="map-pin-link" style="--pin-x: 39%; --pin-y: 49%;" href="https://www.google.com/maps/search/?api=1&query=Monroe%202764%20CABA" target="_blank" rel="noreferrer" aria-label="Abrir Belgrano en Google Maps">
+                <span class="map-pin-dot" aria-hidden="true"></span>
+                <span class="map-pin-label">Belgrano</span>
+              </a>
+              <a class="map-pin-link" style="--pin-x: 42%; --pin-y: 34%;" href="https://www.google.com/maps/search/?api=1&query=Av.%20del%20Libertador%20747%20Vicente%20Lopez%20Buenos%20Aires" target="_blank" rel="noreferrer" aria-label="Abrir Vicente López en Google Maps">
+                <span class="map-pin-dot" aria-hidden="true"></span>
+                <span class="map-pin-label">Vicente López</span>
+              </a>
+              <a class="map-pin-link" style="--pin-x: 25%; --pin-y: 23%;" href="https://www.google.com/maps/search/?api=1&query=Guayaquil%20340%20Boulogne%20San%20Isidro%20Buenos%20Aires" target="_blank" rel="noreferrer" aria-label="Abrir Boulogne / San Isidro en Google Maps">
+                <span class="map-pin-dot" aria-hidden="true"></span>
+                <span class="map-pin-label">Boulogne / San Isidro</span>
+              </a>
+              <a class="map-pin-link" style="--pin-x: 44%; --pin-y: 75%;" href="https://www.google.com/maps/search/?api=1&query=Av.%20Salvador%20Maria%20del%20Carril%204958%20CABA" target="_blank" rel="noreferrer" aria-label="Abrir Villa Devoto en Google Maps">
+                <span class="map-pin-dot" aria-hidden="true"></span>
+                <span class="map-pin-label">Villa Devoto</span>
+              </a>
+              <a class="map-pin-link" style="--pin-x: 29%; --pin-y: 42%;" href="https://www.google.com/maps/search/?api=1&query=Lacroze%204824%20Villa%20Ballester%20Buenos%20Aires" target="_blank" rel="noreferrer" aria-label="Abrir Villa Ballester en Google Maps">
+                <span class="map-pin-dot" aria-hidden="true"></span>
+                <span class="map-pin-label">Villa Ballester</span>
+              </a>
+            </div>
+          </figure>
         </div>
       </section>
 

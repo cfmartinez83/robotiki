@@ -62,10 +62,9 @@ Rendered from `src/pages/contacto.astro`.
 If Sanity returns no published venues or schedules, the original static sections
 remain visible as fallback content.
 
-The venues section also renders an inline SVG map. This is intentionally a
-static illustration with approximate neighborhood pins, not a Google Maps embed,
-so it stays fast and does not require third-party map scripts. Each pin links to
-the matching venue `mapUrl`.
+The venues section renders a static OpenStreetMap tile mosaic with approximate
+pins, not a Google Maps embed, so it stays fast and does not require third-party
+map scripts. Each pin links to the matching venue `mapUrl`.
 
 Schedule cards include the referenced venue address when available, and the
 venue/address text links to Google Maps through the same `mapUrl`.
