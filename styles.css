@@ -2016,6 +2016,35 @@ button {
   backdrop-filter: blur(12px);
 }
 
+.workshops-gallery .gallery-card figcaption {
+  display: grid;
+  gap: 4px;
+  width: auto;
+  border-radius: 22px;
+}
+
+.workshops-gallery .gallery-card figcaption span {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.gallery-placeholder {
+  display: grid;
+  min-height: inherit;
+  place-items: center;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(251, 191, 36, 0.28), transparent 32%),
+    radial-gradient(circle at 70% 30%, rgba(52, 211, 153, 0.22), transparent 36%),
+    linear-gradient(135deg, rgba(124, 58, 237, 0.46), rgba(13, 2, 33, 0.86));
+}
+
+.gallery-placeholder .feature-icon {
+  width: 86px;
+  height: 86px;
+}
+
 .detail-grid {
   display: grid;
   gap: 18px;
@@ -2190,6 +2219,39 @@ button {
   margin: 8px 0 0;
 }
 
+.legal-content {
+  display: grid;
+  gap: 18px;
+  max-width: 980px;
+}
+
+.legal-block {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.07);
+  padding: clamp(20px, 4vw, 34px);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.2);
+}
+
+.legal-block h2,
+.legal-block h3 {
+  margin: 0 0 12px;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+}
+
+.legal-block p,
+.legal-block li {
+  color: var(--muted);
+  line-height: 1.68;
+}
+
+.legal-block ul,
+.legal-block ol {
+  margin: 12px 0 0;
+  padding-left: 1.25rem;
+}
+
 .sedes-grid {
   display: grid;
   gap: 14px;
@@ -2219,6 +2281,81 @@ button {
   border-radius: inherit;
   content: "";
   animation: ping 1.8s ease-out infinite;
+}
+
+.venues-map {
+  margin: 28px 0 0;
+}
+
+.venues-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 34px;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.26);
+}
+
+.venues-map figcaption {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.map-pin-link {
+  cursor: pointer;
+  outline: none;
+}
+
+.map-pin-link:focus-visible .map-pin path,
+.map-pin-link:hover .map-pin path {
+  fill: var(--yellow);
+}
+
+.map-pin-link:focus-visible .map-pin text,
+.map-pin-link:hover .map-pin text {
+  fill: var(--yellow);
+}
+
+.map-zone text {
+  fill: rgba(255, 255, 255, 0.52);
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.map-pin path {
+  fill: var(--orange);
+  stroke: rgba(255, 255, 255, 0.72);
+  stroke-width: 3;
+}
+
+.map-pin circle {
+  fill: var(--yellow);
+}
+
+.map-pin text {
+  fill: #ffffff;
+  font-size: 22px;
+  font-weight: 900;
+  paint-order: stroke;
+  stroke: rgba(13, 2, 33, 0.78);
+  stroke-linejoin: round;
+  stroke-width: 5;
+}
+
+.schedule-map-link {
+  color: var(--white);
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-color: rgba(251, 191, 36, 0.45);
+  text-underline-offset: 3px;
+}
+
+.schedule-map-link:hover {
+  color: var(--yellow);
 }
 
 .center {
@@ -2591,6 +2728,21 @@ button {
   100% {
     opacity: 0;
     transform: translateY(-46px) scale(1.25);
+  }
+}
+
+@media (max-width: 719px) {
+  .venues-map svg {
+    min-height: 340px;
+    object-fit: cover;
+  }
+
+  .map-zone text {
+    font-size: 22px;
+  }
+
+  .map-pin text {
+    font-size: 28px;
   }
 }
 

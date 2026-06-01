@@ -1,0 +1,8 @@
+---
+import StaticPage from "../layouts/StaticPage.astro";
+import { readStaticPage } from "../lib/html.js";
+
+const page = readStaticPage("terminos.html");
+---
+
+<StaticPage {...page} />

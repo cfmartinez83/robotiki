@@ -18,8 +18,8 @@ export const siteSettings = defineType({
     workshopsSection: {
       isEnabled: true,
       eyebrow: "Talleres Robotiki",
-      title: "Nuestros talleres",
-      intro: "Conocé las propuestas que pueden configurarse desde el administrador.",
+      title: "Talleres ocasionales",
+      intro: "Acá tiene que ir una descripción.",
     },
   },
   fields: [

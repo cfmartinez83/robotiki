@@ -1,8 +1,97 @@
 ---
 import StaticPage from "../layouts/StaticPage.astro";
 import { readStaticPage } from "../lib/html.js";
+import { fetchSanity, urlForImage } from "../lib/sanity.js";
 
 const page = readStaticPage("talleres.html");
+
+const [siteSettings, workshops] = await Promise.all([
+  fetchSanity(
+    `*[_id == "8d0d7882-84ff-4b1a-afe5-9a69c9e16858"][0]{
+      workshopsSection
+    }`,
+    {},
+    null,
+  ),
+  fetchSanity(
+    `*[_type == "workshop" && isPublished == true] | order(order asc, title asc){
+      title,
+      text,
+      image,
+      imageAlt
+    }`,
+  ),
+]);
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function insertAfterSection(body, startMarker, insertContent) {
+  const startIndex = body.indexOf(startMarker);
+  if (startIndex === -1) return body;
+
+  const endIndex = body.indexOf("</section>", startIndex);
+  if (endIndex === -1) return body;
+
+  const insertIndex = endIndex + "</section>".length;
+  return `${body.slice(0, insertIndex)}${insertContent}${body.slice(insertIndex)}`;
+}
+
+function renderWorkshopCard(workshop, index) {
+  const imageUrl = workshop.image
+    ? urlForImage(workshop.image)?.width(920).height(680).fit("crop").auto("format").url()
+    : null;
+  const alt = workshop.imageAlt || workshop.title || "Taller Robotiki";
+  const largeClass = index === 0 ? " gallery-card-large" : "";
+  const media = imageUrl
+    ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(alt)}" loading="lazy" />`
+    : '<div class="gallery-placeholder" aria-hidden="true"><span class="feature-icon icon-robot"></span></div>';
+  const text = workshop.text ? `<span>${escapeHtml(workshop.text)}</span>` : "";
+
+  return [
+    `<figure class="gallery-card${largeClass} reveal">`,
+    media,
+    "<figcaption>",
+    `<strong>${escapeHtml(workshop.title)}</strong>`,
+    text,
+    "</figcaption>",
+    "</figure>",
+  ].join("");
+}
+
+const workshopsSettings = siteSettings?.workshopsSection ?? {};
+const showWorkshopsSection = workshopsSettings.isEnabled !== false && workshops.length > 0;
+const dynamicWorkshopsSection = showWorkshopsSection
+  ? [
+      '<section class="section workshops-gallery" id="talleres-ocasionales">',
+      '<div class="gallery-heading reveal">',
+      '<div class="section-heading">',
+      `<p class="eyebrow">${escapeHtml(workshopsSettings.eyebrow || "Talleres Robotiki")}</p>`,
+      `<h2>${escapeHtml(workshopsSettings.title || "Talleres ocasionales")}</h2>`,
+      "</div>",
+      workshopsSettings.intro ? `<p>${escapeHtml(workshopsSettings.intro)}</p>` : "",
+      "</div>",
+      '<div class="gallery-grid stagger">',
+      workshops.map(renderWorkshopCard).join(""),
+      "</div>",
+      "</section>",
+    ].join("")
+  : "";
+
+const body = dynamicWorkshopsSection
+  ? insertAfterSection(
+      page.body,
+      '<section class="section final-cta reveal">',
+      dynamicWorkshopsSection,
+    )
+  : page.body;
+const pageWithBody = {...page, body};
 ---
 
-<StaticPage {...page} />
+<StaticPage {...pageWithBody} />

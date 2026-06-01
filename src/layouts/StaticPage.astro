@@ -47,6 +47,23 @@ const bodyWithSettings = replaceAll(body, [
   ["¡Quiero probar!", siteSettings?.primaryCtaLabel],
   ["© 2026 Robotiki. Hecho con imaginación, código y robots.", siteSettings?.copyright],
 ]);
+
+const bodyWithLegalLinks = bodyWithSettings.replace(
+  `      <nav aria-label="Links de footer">
+        <a href="./talleres.html">Talleres</a>
+        <a href="./experiencias.html">Experiencias</a>
+        <a href="./contacto.html">Sedes y contacto</a>
+        <a href="./jugar.html">Robot DJ</a>
+      </nav>`,
+  `      <nav aria-label="Links de footer">
+        <a href="./talleres.html">Talleres</a>
+        <a href="./experiencias.html">Experiencias</a>
+        <a href="./contacto.html">Sedes y contacto</a>
+        <a href="./jugar.html">Robot DJ</a>
+        <a href="./privacidad.html">Privacidad</a>
+        <a href="./terminos.html">Términos</a>
+      </nav>`,
+);
 ---
 
 <!doctype html>
@@ -66,5 +83,5 @@ const bodyWithSettings = replaceAll(body, [
     <link rel="stylesheet" href="./styles.css" />
     <Analytics />
   </head>
-  <body class={bodyClass} set:html={bodyWithSettings}></body>
+  <body class={bodyClass} set:html={bodyWithLegalLinks}></body>
 </html>

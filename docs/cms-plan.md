@@ -11,6 +11,7 @@ Sanity is the editorial CMS for content that changes often:
 - available schedules
 - values/prices
 - gallery images
+- workshop cards for `talleres.html`
 
 Sanity should become the source of truth for editable content, while Astro keeps
 generating static HTML for SEO and performance on Vercel.
@@ -61,15 +62,28 @@ Rendered from `src/pages/contacto.astro`.
 If Sanity returns no published venues or schedules, the original static sections
 remain visible as fallback content.
 
+The venues section also renders an inline SVG map. This is intentionally a
+static illustration with approximate neighborhood pins, not a Google Maps embed,
+so it stays fast and does not require third-party map scripts. Each pin links to
+the matching venue `mapUrl`.
+
+Schedule cards include the referenced venue address when available, and the
+venue/address text links to Google Maps through the same `mapUrl`.
+
 The navigation label is "Sedes y contacto" and points to `contacto.html`.
 Internal CTAs can still point to `contacto.html#sedes`.
 
 ### `talleres.html`
 
-The settings singleton now includes `workshopsSection`, which will hold the
-editable title, eyebrow, intro text, and visibility flag for the upcoming
-dynamic workshops section. Workshop cards should live in their own repeatable
-document type instead of inside settings.
+Rendered from `src/pages/talleres.astro`.
+
+- `siteSettings.workshopsSection`: controls the editable eyebrow, title, intro
+  text, and visibility flag.
+- `workshop`: powers the dynamic "Talleres ocasionales" gallery below the
+  "Querés saber qué taller corresponde?" CTA.
+
+If the settings section is disabled or there are no published `workshop`
+documents, the dynamic section is hidden.
 
 ## Current editorial model
 
@@ -82,6 +96,14 @@ document type instead of inside settings.
 - `brand`: name, logo, website, order, publish flag.
 - `venue`: name, zone, address, Google Maps URL, WhatsApp, publish flag.
 - `schedule`: level, venue, day, time, notes, publish flag.
+- `workshop`: title, text, image, image alt text, order, publish flag.
+
+## Legal pages
+
+`privacidad.html` and `terminos.html` are fixed Astro-rendered pages generated
+from static HTML files. Footer links are injected by `StaticPage.astro`, so the
+legal links appear consistently across the site without duplicating footer
+markup in every page.
 
 ## Setup required
 

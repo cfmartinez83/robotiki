@@ -86,6 +86,70 @@
           <article class="sede-card reveal"><span></span><div><h3>Villa Ballester</h3><p>GBA Norte</p></div></article>
           <article class="sede-card reveal"><span></span><div><h3>Boulogne</h3><p>GBA Norte</p></div></article>
         </div>
+        <figure class="venues-map reveal" aria-label="Mapa ilustrado de sedes Robotiki">
+          <svg viewBox="0 0 900 520" role="img" aria-labelledby="venues-map-title venues-map-desc">
+            <title id="venues-map-title">Mapa ilustrado de sedes Robotiki</title>
+            <desc id="venues-map-desc">Ubicación aproximada de las sedes en CABA y GBA Norte.</desc>
+            <defs>
+              <linearGradient id="mapBg" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#27105f" />
+                <stop offset="100%" stop-color="#0f0a2e" />
+              </linearGradient>
+              <filter id="pinGlow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="7" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <rect width="900" height="520" rx="34" fill="url(#mapBg)" />
+            <path d="M150 390 C230 310 240 230 310 170 C395 96 500 70 650 105 C760 130 805 210 760 306 C715 402 610 432 480 420 C345 408 250 455 150 390Z" fill="rgba(255,255,255,0.09)" stroke="rgba(255,255,255,0.18)" stroke-width="3" />
+            <path d="M240 388 C330 340 375 250 425 172 C470 102 558 102 635 142" fill="none" stroke="rgba(52,211,153,0.35)" stroke-width="10" stroke-linecap="round" />
+            <path d="M250 242 C360 250 472 268 652 258" fill="none" stroke="rgba(251,191,36,0.28)" stroke-width="7" stroke-linecap="round" />
+            <g class="map-zone">
+              <text x="260" y="440">CABA</text>
+              <text x="610" y="86">GBA Norte</text>
+              <text x="590" y="460">Ubicaciones aproximadas</text>
+            </g>
+            <a class="map-pin-link" href="https://www.google.com/maps/search/?api=1&query=Monroe%202764%20CABA" target="_blank" rel="noreferrer" aria-label="Abrir Belgrano en Google Maps">
+              <g class="map-pin" transform="translate(360 270)" filter="url(#pinGlow)">
+                <path d="M0 -32 C19 -32 34 -17 34 2 C34 28 0 58 0 58 C0 58 -34 28 -34 2 C-34 -17 -19 -32 0 -32Z" />
+                <circle cx="0" cy="2" r="11" />
+                <text x="44" y="6">Belgrano</text>
+              </g>
+            </a>
+            <a class="map-pin-link" href="https://www.google.com/maps/search/?api=1&query=Av.%20del%20Libertador%20747%20Vicente%20Lopez%20Buenos%20Aires" target="_blank" rel="noreferrer" aria-label="Abrir Vicente López en Google Maps">
+              <g class="map-pin" transform="translate(480 205)" filter="url(#pinGlow)">
+                <path d="M0 -32 C19 -32 34 -17 34 2 C34 28 0 58 0 58 C0 58 -34 28 -34 2 C-34 -17 -19 -32 0 -32Z" />
+                <circle cx="0" cy="2" r="11" />
+                <text x="44" y="6">Vicente López</text>
+              </g>
+            </a>
+            <a class="map-pin-link" href="https://www.google.com/maps/search/?api=1&query=Guayaquil%20340%20Boulogne%20San%20Isidro%20Buenos%20Aires" target="_blank" rel="noreferrer" aria-label="Abrir Boulogne / San Isidro en Google Maps">
+              <g class="map-pin" transform="translate(610 165)" filter="url(#pinGlow)">
+                <path d="M0 -32 C19 -32 34 -17 34 2 C34 28 0 58 0 58 C0 58 -34 28 -34 2 C-34 -17 -19 -32 0 -32Z" />
+                <circle cx="0" cy="2" r="11" />
+                <text x="44" y="6">Boulogne / San Isidro</text>
+              </g>
+            </a>
+            <a class="map-pin-link" href="https://www.google.com/maps/search/?api=1&query=Av.%20Salvador%20Maria%20del%20Carril%204958%20CABA" target="_blank" rel="noreferrer" aria-label="Abrir Villa Devoto en Google Maps">
+              <g class="map-pin" transform="translate(290 345)" filter="url(#pinGlow)">
+                <path d="M0 -32 C19 -32 34 -17 34 2 C34 28 0 58 0 58 C0 58 -34 28 -34 2 C-34 -17 -19 -32 0 -32Z" />
+                <circle cx="0" cy="2" r="11" />
+                <text x="44" y="6">Villa Devoto</text>
+              </g>
+            </a>
+            <a class="map-pin-link" href="https://www.google.com/maps/search/?api=1&query=Lacroze%204824%20Villa%20Ballester%20Buenos%20Aires" target="_blank" rel="noreferrer" aria-label="Abrir Villa Ballester en Google Maps">
+              <g class="map-pin" transform="translate(540 330)" filter="url(#pinGlow)">
+                <path d="M0 -32 C19 -32 34 -17 34 2 C34 28 0 58 0 58 C0 58 -34 28 -34 2 C-34 -17 -19 -32 0 -32Z" />
+                <circle cx="0" cy="2" r="11" />
+                <text x="44" y="6">Villa Ballester</text>
+              </g>
+            </a>
+          </svg>
+          <figcaption>Mapa ilustrativo de zonas: tocá una sede para abrir su dirección en Google Maps.</figcaption>
+        </figure>
         <div class="center reveal">
           <a
             class="btn btn-outline"
@@ -106,31 +170,31 @@
         <div class="schedule-grid stagger">
           <article class="schedule-card reveal">
             <h3>Exploradores</h3>
-            <p>Vicente López: sábados 10.30 hs.</p>
-            <p>Boulogne: sábados 16 hs.</p>
-            <p>Villa Ballester: miércoles 17.30 hs.</p>
-            <p>Belgrano: jueves 17.30 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Av.%20del%20Libertador%20747%20Vicente%20Lopez%20Buenos%20Aires" target="_blank" rel="noreferrer">Vicente López - Av. del Libertador 747</a>: sábados 10.30 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Guayaquil%20340%20Boulogne%20San%20Isidro%20Buenos%20Aires" target="_blank" rel="noreferrer">Boulogne / San Isidro - Guayaquil 340</a>: sábados 16 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Lacroze%204824%20Villa%20Ballester%20Buenos%20Aires" target="_blank" rel="noreferrer">Villa Ballester - Lacroze 4824</a>: miércoles 17.30 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Monroe%202764%20CABA" target="_blank" rel="noreferrer">Belgrano - Monroe 2764</a>: jueves 17.30 hs.</p>
           </article>
           <article class="schedule-card reveal">
             <h3>Constructores</h3>
-            <p>Vicente López: martes, jueves y sábados.</p>
-            <p>Boulogne: lunes, martes, jueves, viernes y sábados.</p>
-            <p>Belgrano: lunes a sábados 17.30 hs.</p>
-            <p>Devoto, Palermo y Villa Ballester: consultar disponibilidad.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Av.%20del%20Libertador%20747%20Vicente%20Lopez%20Buenos%20Aires" target="_blank" rel="noreferrer">Vicente López - Av. del Libertador 747</a>: martes, jueves y sábados.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Guayaquil%20340%20Boulogne%20San%20Isidro%20Buenos%20Aires" target="_blank" rel="noreferrer">Boulogne / San Isidro - Guayaquil 340</a>: lunes, martes, jueves, viernes y sábados.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Monroe%202764%20CABA" target="_blank" rel="noreferrer">Belgrano - Monroe 2764</a>: lunes a sábados 17.30 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Av.%20Salvador%20Maria%20del%20Carril%204958%20CABA" target="_blank" rel="noreferrer">Villa Devoto - Av. Salvador María del Carril 4958</a> y <a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Lacroze%204824%20Villa%20Ballester%20Buenos%20Aires" target="_blank" rel="noreferrer">Villa Ballester - Lacroze 4824</a>: consultar disponibilidad.</p>
           </article>
           <article class="schedule-card reveal">
             <h3>Inventores</h3>
-            <p>Vicente López: jueves 18 hs.</p>
-            <p>Boulogne: lunes 18 hs. y sábados 10.30 hs.</p>
-            <p>Villa Ballester: viernes 17.30 hs.</p>
-            <p>Belgrano: sábados 10.30 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Av.%20del%20Libertador%20747%20Vicente%20Lopez%20Buenos%20Aires" target="_blank" rel="noreferrer">Vicente López - Av. del Libertador 747</a>: jueves 18 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Guayaquil%20340%20Boulogne%20San%20Isidro%20Buenos%20Aires" target="_blank" rel="noreferrer">Boulogne / San Isidro - Guayaquil 340</a>: lunes 18 hs. y sábados 10.30 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Lacroze%204824%20Villa%20Ballester%20Buenos%20Aires" target="_blank" rel="noreferrer">Villa Ballester - Lacroze 4824</a>: viernes 17.30 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Monroe%202764%20CABA" target="_blank" rel="noreferrer">Belgrano - Monroe 2764</a>: sábados 10.30 hs.</p>
           </article>
           <article class="schedule-card reveal">
             <h3>Genios</h3>
-            <p>Vicente López: jueves 18 hs.</p>
-            <p>Boulogne: sábados 10.30 hs.</p>
-            <p>Villa Ballester: viernes 17.30 hs.</p>
-            <p>Belgrano: sábados 10.30 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Av.%20del%20Libertador%20747%20Vicente%20Lopez%20Buenos%20Aires" target="_blank" rel="noreferrer">Vicente López - Av. del Libertador 747</a>: jueves 18 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Guayaquil%20340%20Boulogne%20San%20Isidro%20Buenos%20Aires" target="_blank" rel="noreferrer">Boulogne / San Isidro - Guayaquil 340</a>: sábados 10.30 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Lacroze%204824%20Villa%20Ballester%20Buenos%20Aires" target="_blank" rel="noreferrer">Villa Ballester - Lacroze 4824</a>: viernes 17.30 hs.</p>
+            <p><a class="schedule-map-link" href="https://www.google.com/maps/search/?api=1&query=Monroe%202764%20CABA" target="_blank" rel="noreferrer">Belgrano - Monroe 2764</a>: sábados 10.30 hs.</p>
           </article>
         </div>
       </section>

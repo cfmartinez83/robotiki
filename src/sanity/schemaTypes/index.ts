@@ -6,6 +6,7 @@ import {price} from "./price";
 import {schedule} from "./schedule";
 import {siteSettings} from "./siteSettings";
 import {venue} from "./venue";
+import {workshop} from "./workshop";
 
 export const schemaTypes = [
   siteSettings,
@@ -16,4 +17,5 @@ export const schemaTypes = [
   schedule,
   price,
   galleryImage,
+  workshop,
 ];
