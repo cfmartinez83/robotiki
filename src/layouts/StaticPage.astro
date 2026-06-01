@@ -1,7 +1,52 @@
 ---
 import Analytics from "@vercel/analytics/astro";
+import { fetchSanity } from "../lib/sanity.js";
 
 const { title, description, bodyClass = "", body } = Astro.props;
+const siteSettings = await fetchSanity(
+  `*[_id == "8d0d7882-84ff-4b1a-afe5-9a69c9e16858"][0]{
+    tagline,
+    whatsapp,
+    whatsappLabel,
+    email,
+    secondaryEmail,
+    address,
+    businessHours,
+    primaryCtaLabel,
+    copyright
+  }`,
+  {},
+  null,
+);
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function replaceAll(value, replacements) {
+  return replacements.reduce((current, [search, replacement]) => {
+    if (!replacement) return current;
+    return current.replaceAll(search, escapeHtml(replacement));
+  }, value);
+}
+
+const whatsappNumber = siteSettings?.whatsapp?.replace(/\D/g, "");
+const bodyWithSettings = replaceAll(body, [
+  ["Robotiki - imagina tu futuro", siteSettings?.tagline],
+  ["info@robotiki.com.ar", siteSettings?.email],
+  ["robotikiar@gmail.com", siteSettings?.secondaryEmail],
+  ["+54 9 11 3391-7070", siteSettings?.whatsappLabel],
+  ["5491133917070", whatsappNumber],
+  ["Av. Libertador 747, Vicente López", siteSettings?.address],
+  ["Lunes a viernes de 9:00 a 20:00 hs.", siteSettings?.businessHours],
+  ["¡Quiero probar!", siteSettings?.primaryCtaLabel],
+  ["© 2026 Robotiki. Hecho con imaginación, código y robots.", siteSettings?.copyright],
+]);
 ---
 
 <!doctype html>
@@ -21,5 +66,5 @@ const { title, description, bodyClass = "", body } = Astro.props;
     <link rel="stylesheet" href="./styles.css" />
     <Analytics />
   </head>
-  <body class={bodyClass} set:html={body}></body>
+  <body class={bodyClass} set:html={bodyWithSettings}></body>
 </html>

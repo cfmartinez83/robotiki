@@ -29,6 +29,14 @@ Existing duplicate settings documents should not be used for new content. Once
 the singleton has been verified in production, old duplicate settings documents
 can be unpublished or deleted from Sanity Manage/Studio.
 
+The Studio hides delete and duplicate actions for this singleton to reduce the
+chance of leaving the settings screen pointing at a removed document.
+
+The shared Astro layout reads global site fields from this singleton and applies
+them across the static pages with hardcoded fallbacks. This currently covers the
+footer tagline, public emails, WhatsApp label/link, primary address, business
+hours, main CTA label, and copyright text.
+
 ### `experiencias.html`
 
 Rendered from `src/pages/experiencias.astro`.
@@ -65,6 +73,8 @@ document type instead of inside settings.
 
 ## Current editorial model
 
+- `siteSettings`: site name, tagline, copyright, contact information, social
+  links, primary CTA label, default SEO fields, and editable section settings.
 - `occasionalWorkshop`: title, summary, date, age range, venue, schedule, price,
   image, featured flag, publish flag.
 - `experience`: title, category, summary, body, image, gallery, event date,

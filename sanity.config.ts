@@ -6,7 +6,7 @@ import {schemaTypes} from "./src/sanity/schemaTypes";
 const projectId =
   process.env.PUBLIC_SANITY_PROJECT_ID || process.env.SANITY_STUDIO_PROJECT_ID || "f95ac08s";
 const dataset = process.env.PUBLIC_SANITY_DATASET || process.env.SANITY_STUDIO_DATASET || "production";
-const siteSettingsDocumentId = "7599209b-3e9c-4dd3-a4ca-6174ed11ce50";
+const siteSettingsDocumentId = "8d0d7882-84ff-4b1a-afe5-9a69c9e16858";
 const singletonTypes = new Set(["siteSettings"]);
 
 export default defineConfig({
@@ -34,5 +34,14 @@ export default defineConfig({
     types: schemaTypes,
     templates: (templates) =>
       templates.filter((template) => !singletonTypes.has(template.schemaType)),
+  },
+  document: {
+    actions: (previousActions, context) => {
+      if (singletonTypes.has(context.schemaType)) {
+        return previousActions.filter(({action}) => !["delete", "duplicate"].includes(action || ""));
+      }
+
+      return previousActions;
+    },
   },
 });
